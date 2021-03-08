@@ -44,7 +44,10 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildDisputantNameB() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Disputant B Name'),
+      decoration: InputDecoration(
+        labelText: 'Disputant B Name',
+        //hintText: 'Username or Email',
+      ),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Please enter your second disputant\'s name.';
@@ -106,6 +109,7 @@ class _FormPageState extends State<FormPage> {
                                 SizedBox(height: 20.0),
                                 _buildDisputantNameA(),
                                 _buildDisputantNameB(),
+                                SizedBox(height: 20.0),
                                 _buildProblemDescription(),
                                 /*_buildDisputantNameC(),
                                 _buildDisputeDate(),*/
