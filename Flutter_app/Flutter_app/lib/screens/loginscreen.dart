@@ -1,3 +1,4 @@
+import 'package:Flutter_app/widgets/curveclipper.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,6 +15,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildUsername() {
     return TextFormField(
       decoration: InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(20.0),
+            ),
+          ),
           contentPadding: EdgeInsets.symmetric(vertical: 15.0),
           fillColor: Colors.white,
           filled: true,
@@ -33,6 +39,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildPassword() {
     return TextFormField(
       decoration: InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(20.0),
+            ),
+          ),
           contentPadding: EdgeInsets.symmetric(vertical: 15.0),
           fillColor: Colors.white,
           filled: true,
@@ -61,14 +72,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
-                        colors: [Colors.yellow, Colors.blue, Colors.red])),
+                        colors: [
+                      Colors.yellow.withOpacity(0.75),
+                      Colors.blue.withOpacity(0.75),
+                      Colors.red.withOpacity(0.75)
+                    ])),
                 child: Column(
                   children: <Widget>[
-                    Image(
-                      height: MediaQuery.of(context).size.height / 2.5,
-                      width: double.infinity,
-                      image: AssetImage('assets/images/placeholder4login.jpg'),
-                      fit: BoxFit.cover,
+                    ClipPath(
+                      //clipper: CurveClipper(),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height / 2.5,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/placeholder4login.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: new ColorFilter.mode(
+                                  Colors.black.withOpacity(0.5),
+                                  BlendMode.dstATop),
+                            ),
+                          )
+                          /*
+                          image:
+                              AssetImage('assets/images/placeholder4login.jpg'),
+                          color: Colors.white,
+                          colorBlendMode: BlendMode.colorBurn,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.cover,
+                          */
+                          ),
                     ),
                     SizedBox(height: 25.0),
                     Text('-AppName-',

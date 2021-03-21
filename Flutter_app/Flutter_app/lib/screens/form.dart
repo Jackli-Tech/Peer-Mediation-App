@@ -6,6 +6,19 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+  int _currentTabIndex = 0;
+
+  onTapped(int index) {
+    setState(() {
+      _currentTabIndex = index;
+    });
+  }
+
+  List<Widget> tabs = [
+    //resources(),
+    //form(),
+  ];
+
   String _mediatorName;
   String _disputantNameA;
   String _disputantNameB;
@@ -81,59 +94,86 @@ class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("-AppName-")),
-        body: SingleChildScrollView(
-            child: ConstrainedBox(
-                constraints: BoxConstraints(),
-                child: ListView(
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    children: <Widget>[
-                      SizedBox(height: 40.0),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Text('Peer Mediation Form',
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 28.0,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.0)),
-                      ),
-                      SizedBox(height: 80.0),
-                      Container(
-                          margin: EdgeInsets.all(24),
-                          child: Form(
-                              key: _formKey,
-                              child: Column(children: <Widget>[
-                                _buildMediatorName(),
-                                SizedBox(height: 20.0),
-                                _buildDisputantNameA(),
-                                _buildDisputantNameB(),
-                                SizedBox(height: 20.0),
-                                _buildProblemDescription(),
-                                /*_buildDisputantNameC(),
+      appBar: AppBar(title: Text("-AppName-")),
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: ListView(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                children: <Widget>[
+                  SizedBox(height: 40.0),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text('Peer Mediation Form',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0)),
+                  ),
+                  SizedBox(height: 80.0),
+                  Container(
+                      margin: EdgeInsets.all(24),
+                      child: Form(
+                          key: _formKey,
+                          child: Column(children: <Widget>[
+                            _buildMediatorName(),
+                            SizedBox(height: 20.0),
+                            _buildDisputantNameA(),
+                            _buildDisputantNameB(),
+                            SizedBox(height: 20.0),
+                            _buildProblemDescription(),
+                            /*_buildDisputantNameC(),
                                 _buildDisputeDate(),*/
-                                SizedBox(height: 60.0),
-                                RaisedButton(
-                                  child: Text('Submit'),
-                                  onPressed: () {
-                                    if (!_formKey.currentState.validate()) {
-                                      return;
-                                    }
-                                    _formKey.currentState.save();
-                                    print('Mediator: ' + _mediatorName);
-                                    print('Disputant A: ' + _disputantNameA);
-                                    print('Disputant B: ' + _disputantNameB);
-                                    print('Brief summary of dispute: ' +
-                                        _problemDescription);
+                            SizedBox(height: 60.0),
+                            RaisedButton(
+                              child: Text('Submit'),
+                              onPressed: () {
+                                if (!_formKey.currentState.validate()) {
+                                  return;
+                                }
+                                _formKey.currentState.save();
+                                print('Mediator: ' + _mediatorName);
+                                print('Disputant A: ' + _disputantNameA);
+                                print('Disputant B: ' + _disputantNameB);
+                                print('Brief summary of dispute: ' +
+                                    _problemDescription);
 
-                                    /*print(_disputantNameA);
+                                /*print(_disputantNameA);
                             print(_disputantNameB);
                             print(_disputantNameC);
                             print(_disputeDate);*/
-                                  },
-                                )
-                              ])))
-                    ]))));
+                              },
+                            )
+                          ]))),
+                ])),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentTabIndex,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home'),
+                backgroundColor: Colors.blue),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                title: Text('Profile'),
+                backgroundColor: Colors.blue),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.toc),
+                title: Text('Resources'),
+                backgroundColor: Colors.blue),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                title: Text('Settings'),
+                backgroundColor: Colors.blue),
+          ],
+          onTap: (index) {
+            setState(() {
+              _currentTabIndex = index;
+            });
+          }),
+    );
   }
 }
