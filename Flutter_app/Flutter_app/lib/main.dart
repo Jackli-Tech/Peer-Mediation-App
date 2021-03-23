@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'screens/resources.dart';
-import 'screens/loginscreen.dart';
-import 'screens/form.dart';
-import 'screens/home.dart';
+import 'Pages/resources.dart';
+import 'Pages/loginscreen.dart';
+import 'Pages/form.dart';
+import 'Pages/home.dart';
+import 'Pages/SignInPage.dart';
+import 'Pages/SignUpPage.dart';
+import 'Pages/WelcomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,9 +34,9 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        //home: LoginScreen());
-        //home: FormPage());
-        //home: HomePage());
-        home: ResourcePage());
+        home: SignInPage());
+    //home: FormPage());
+    //home: HomePage());
+    //home: ResourcePage());
   }
 }
