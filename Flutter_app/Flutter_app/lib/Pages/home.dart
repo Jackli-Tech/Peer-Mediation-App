@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'resources.dart';
 import 'loginscreen.dart';
 import 'form.dart';
+import 'profile.dart';
+import 'settings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -62,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => FormPage(),
+                        builder: (context) => ProfilePage(),
                       ));
                     }),
                 SizedBox(height: 50.0),
@@ -75,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => FormPage(),
+                        builder: (context) => SettingsPage(),
                       ));
                     }),
               ]),
@@ -86,7 +88,13 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     SizedBox(height: 100.0),
                     Text('INSERT TIMETABLE HERE',
-                        style: TextStyle(color: Colors.white)),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0)),
+                    SizedBox(height: 160.0),
                   ],
                 )),
           ],

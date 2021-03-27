@@ -106,7 +106,7 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(height: 40.0),
                   Container(
                     alignment: Alignment.center,
-                    child: Text('Peer Mediation Form',
+                    child: Text('Mediator\'s Form',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 28.0,
