@@ -9,10 +9,8 @@ class _OpenQuestionsState extends State<OpenQuestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("-AppName-")),
+      appBar: AppBar(title: Text("Cool Schools Mediation App")),
       body: SingleChildScrollView(
-        //child: Container(
-
         child: ConstrainedBox(
             //height: MediaQuery.of(context).size.height,
             //child: Column(

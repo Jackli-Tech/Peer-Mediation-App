@@ -95,7 +95,7 @@ class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("-AppName-")),
+      appBar: AppBar(title: Text("Cool Schools Mediation App")),
       body: SingleChildScrollView(
         child: ConstrainedBox(
             constraints: BoxConstraints(),
@@ -150,7 +150,7 @@ class _FormPageState extends State<FormPage> {
                           ]))),
                 ])),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentTabIndex,
           items: [
             BottomNavigationBarItem(
@@ -174,7 +174,7 @@ class _FormPageState extends State<FormPage> {
             setState(() {
               _currentTabIndex = index;
             });
-          }),
+          })*/
     );
   }
 }

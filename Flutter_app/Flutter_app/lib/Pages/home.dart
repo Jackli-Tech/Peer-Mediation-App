@@ -81,12 +81,14 @@ class _HomePageState extends State<HomePage> {
               ]),
             ),
             Container(
-                child: ListView(
-              children: <Widget>[
-                SizedBox(height: 100.0),
-                Text('INSERT TIMETABLE HERE'),
-              ],
-            )),
+                decoration: BoxDecoration(color: Colors.blue),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 100.0),
+                    Text('INSERT TIMETABLE HERE',
+                        style: TextStyle(color: Colors.white)),
+                  ],
+                )),
           ],
         ));
   }
