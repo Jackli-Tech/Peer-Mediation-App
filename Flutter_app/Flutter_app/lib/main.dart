@@ -6,7 +6,6 @@ import 'Pages/home.dart';
 import 'Pages/SignInPage.dart';
 import 'Pages/SignUpPage.dart';
 import 'Pages/WelcomePage.dart';
-import 'Pages/hometwo.dart';
 import 'Pages/mediationprocess.dart';
 
 void main() {
@@ -36,10 +35,9 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        //home: HomePageTwo());
+
         //home: SignInPage());
-        //home: FormPage());
+
         home: HomePage());
-    //home: MediationProcess());
   }
 }

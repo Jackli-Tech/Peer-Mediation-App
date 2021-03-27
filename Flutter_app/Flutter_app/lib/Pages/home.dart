@@ -1,6 +1,5 @@
 import 'mediationprocess.dart';
 import 'package:flutter/material.dart';
-import 'resources.dart';
 import 'loginscreen.dart';
 import 'form.dart';
 import 'profile.dart';
@@ -80,23 +79,63 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) => SettingsPage(),
                       ));
                     }),
+                SizedBox(height: 60.0),
+                Text('Swipe up for Duty Roster Table',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20.0, color: Colors.grey[500]))
               ]),
             ),
-            Container(
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 100.0),
-                    Text('INSERT TIMETABLE HERE',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0)),
-                    SizedBox(height: 160.0),
-                  ],
-                )),
+            DataTable(columns: const <DataColumn>[
+              DataColumn(
+                label: Text(
+                  'Name',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+              ),
+              DataColumn(
+                label: Text(
+                  'Duty Hours',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+              ),
+              DataColumn(
+                label: Text(
+                  'Role',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+              ),
+              DataColumn(
+                label: Text(
+                  'Class',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+              ),
+            ], rows: const <DataRow>[
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(Text('James')),
+                  DataCell(Text('10:00AM - 12:00PM')),
+                  DataCell(Text('Mediator')),
+                  DataCell(Text('7B')),
+                ],
+              ),
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(Text('Sarah')),
+                  DataCell(Text('10:00AM - 12:00PM')),
+                  DataCell(Text('Coordinator')),
+                  DataCell(Text('N/A')),
+                ],
+              ),
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(Text('Nick')),
+                  DataCell(Text('10:00AM - 12:00PM')),
+                  DataCell(Text('Mediator')),
+                  DataCell(Text('2B')),
+                ],
+              ),
+            ])
           ],
         ));
   }

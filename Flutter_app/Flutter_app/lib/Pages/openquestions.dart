@@ -31,7 +31,7 @@ class _OpenQuestionsState extends State<OpenQuestions> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 28.0,
+                                fontSize: 30.0,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1.0)),
                         SizedBox(height: 100.0),

@@ -44,8 +44,8 @@ class _MediationProcessState extends State<MediationProcess> {
                     RaisedButton(
                         child:
                             Text('More Help', style: TextStyle(fontSize: 40.0)),
-                        padding: EdgeInsets.all(70),
-                        color: Colors.blue[300],
+                        padding: EdgeInsets.all(50),
+                        color: Colors.green[500],
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius:
