@@ -12,11 +12,7 @@ class _OpenQuestionsState extends State<OpenQuestions> {
       appBar: AppBar(title: Text("Cool Schools Mediation App")),
       body: SingleChildScrollView(
         child: ConstrainedBox(
-            //height: MediaQuery.of(context).size.height,
-            //child: Column(
-
             constraints: BoxConstraints(),
-            //the 3 following lines are very important(!!!) for scrolling mechanics. wrap a widget ina listview!!
             child: Column(
               children: <Widget>[
                 Container(

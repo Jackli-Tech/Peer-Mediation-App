@@ -150,31 +150,6 @@ class _FormPageState extends State<FormPage> {
                           ]))),
                 ])),
       ),
-      /*bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentTabIndex,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                title: Text('Profile'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.toc),
-                title: Text('Mediation Process'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Settings'),
-                backgroundColor: Colors.blue),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentTabIndex = index;
-            });
-          })*/
     );
   }
 }

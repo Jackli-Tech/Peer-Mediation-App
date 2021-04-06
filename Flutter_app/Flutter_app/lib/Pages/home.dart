@@ -1,6 +1,6 @@
 import 'mediationprocess.dart';
 import 'package:flutter/material.dart';
-import 'loginscreen.dart';
+//import 'loginscreen.dart';
 import 'form.dart';
 import 'profile.dart';
 import 'settings.dart';
@@ -13,22 +13,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController(initialPage: 0);
+    PageController homeController = PageController(initialPage: 0);
     return Scaffold(
         appBar: AppBar(title: Text("Cool Schools Mediation App")),
         body: PageView(
           pageSnapping: true,
           scrollDirection: Axis.vertical,
-          controller: controller,
+          controller: homeController,
           children: [
             Container(
               margin: const EdgeInsets.only(
-                  left: 75.0, top: 25.0, bottom: 25.0, right: 75.0),
+                  left: 200.0, top: 25.0, bottom: 25.0, right: 200.0),
               child: ListView(children: <Widget>[
                 SizedBox(height: 40.0),
                 RaisedButton(
-                    child:
-                        Text('Submit Form', style: TextStyle(fontSize: 40.0)),
+                    child: Text('Submit Form',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
                     padding: EdgeInsets.all(70),
                     color: Colors.green,
                     textColor: Colors.white,
@@ -42,8 +43,9 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 50.0),
                 RaisedButton(
                     child: Text('Mediation Process',
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 40.0)),
-                    padding: EdgeInsets.all(70),
+                    padding: EdgeInsets.all(50),
                     color: Colors.orange,
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -55,7 +57,9 @@ class _HomePageState extends State<HomePage> {
                     }),
                 SizedBox(height: 50.0),
                 RaisedButton(
-                    child: Text('Profile', style: TextStyle(fontSize: 40.0)),
+                    child: Text('Profile',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
                     padding: EdgeInsets.all(70),
                     color: Colors.blue,
                     textColor: Colors.white,
@@ -68,7 +72,9 @@ class _HomePageState extends State<HomePage> {
                     }),
                 SizedBox(height: 50.0),
                 RaisedButton(
-                    child: Text('Settings', style: TextStyle(fontSize: 40.0)),
+                    child: Text('Settings',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
                     padding: EdgeInsets.all(70),
                     color: Colors.red,
                     textColor: Colors.white,
@@ -132,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                   DataCell(Text('Nick')),
                   DataCell(Text('10:00AM - 12:00PM')),
                   DataCell(Text('Mediator')),
-                  DataCell(Text('2B')),
+                  DataCell(Text('8B')),
                 ],
               ),
             ])
