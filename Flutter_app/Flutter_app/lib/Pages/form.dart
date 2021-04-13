@@ -25,6 +25,7 @@ class _FormPageState extends State<FormPage> {
   String _disputantNameB;
   String _problemDescription;
   DateTime _disputeDate;
+  bool _conflictCheckBox;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -127,6 +128,7 @@ class _FormPageState extends State<FormPage> {
                             _buildProblemDescription(),
                             /*_buildDisputantNameC(),
                                 _buildDisputeDate(),*/
+
                             SizedBox(height: 60.0),
                             RaisedButton(
                               child: Text('Submit'),
