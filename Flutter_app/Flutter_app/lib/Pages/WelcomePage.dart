@@ -26,8 +26,9 @@ class _WelcomePageState extends State<WelcomePage> {
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
           child: Column(
             children: [
+              SizedBox(height: 40.0),
               Text(
-                "DevStack",
+                "Cool Schools Mediation App",
                 style: TextStyle(
                     fontSize: 38,
                     fontWeight: FontWeight.w600,
@@ -35,7 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 6),
               Text(
-                "Great stories for greate person ",
+                "A Collaboration between The Peace Foundation NZ and AUT",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
