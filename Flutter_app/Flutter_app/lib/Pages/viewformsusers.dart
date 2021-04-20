@@ -19,18 +19,6 @@ class BodyLayout extends StatelessWidget {
 }
 
 Widget _formsListView(BuildContext context) {
-  final conflicts = [
-    'Conflict 1',
-    'Conflict 2',
-    'Conflict 3',
-    'Conflict 4',
-    'Conflict 5',
-    'Conflict 6',
-    'Conflict 7',
-    'Conflict 8',
-    'Conflict 9'
-  ];
-
   //this data ideally will be taken from the database
   final mediators = [
     'James',
@@ -45,7 +33,7 @@ Widget _formsListView(BuildContext context) {
   ];
 
   return ListView.builder(
-    itemCount: conflicts.length,
+    itemCount: mediators.length,
     itemBuilder: (context, index) {
       return Card(
         //                           <-- Card widget
@@ -53,7 +41,7 @@ Widget _formsListView(BuildContext context) {
             title: Text('Mediator: ' + mediators[index]),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {
-              print('tapped ' + conflicts[index]);
+              print('tapped ' + mediators[index]);
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ViewFormsList(),
               ));
