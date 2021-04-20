@@ -9,7 +9,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Welcome on User page!!!!!!!!!!!"),
+      body: Text("Welcome to the User page!!!!!!!!!!!"),
     );
   }
 }
