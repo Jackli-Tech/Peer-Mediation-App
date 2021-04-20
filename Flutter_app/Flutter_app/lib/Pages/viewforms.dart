@@ -8,26 +8,42 @@ class ViewForms extends StatefulWidget {
 class _ViewFormsState extends State<ViewForms> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Cool Schools Mediation App')),
-        body: SingleChildScrollView(
-            child: ConstrainedBox(
-                constraints: BoxConstraints(),
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  children: <Widget>[
-                    SizedBox(height: 40.0),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text('Viewing Forms',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 28.0,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.0)),
-                    )
-                  ],
-                ))));
+    final titles = [
+      'Conflict 1',
+      'Conflict 2',
+      'Conflict 3',
+      'Conflict 4',
+      'Conflict 5',
+      'Conflict 6',
+      'Conflict 7',
+      'Conflict 8',
+      'Conflict 9'
+    ];
+
+    final mediators = [
+      'James',
+      'Amelia',
+      'Rick',
+      'Demna',
+      'Frank',
+      'Raf',
+      'Charlie',
+      'Jake',
+      'Benny'
+    ];
+
+    return ListView.builder(
+      itemCount: titles.length,
+      itemBuilder: (context, index) {
+        return Card(
+          //                           <-- Card widget
+          child: ListTile(
+            title: Text(titles[index]),
+            subtitle: Text('Mediator: ' + mediators[index]),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+        );
+      },
+    );
   }
 }
