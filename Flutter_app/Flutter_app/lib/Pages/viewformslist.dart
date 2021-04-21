@@ -33,7 +33,6 @@ Widget _formsListView(BuildContext context) {
 
   //this data ideally will be taken from the database
   final date = ['12/3/2021', '14/3/2021', '15/3/2021'];
-
   final time = ['12:54 pm', '2:39 pm', '3:02 pm'];
 
   return ListView.builder(

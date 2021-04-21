@@ -5,6 +5,14 @@ class ViewForms extends StatefulWidget {
   _ViewFormsState createState() => _ViewFormsState();
 }
 
+String _mediatorName;
+String _disputantAName;
+String _disputantBName;
+String _conflictCause;
+String _mediatorHandling;
+String _referToTeacher;
+String _conflictResolved;
+
 class _ViewFormsState extends State<ViewForms> {
   @override
   Widget build(BuildContext context) {
