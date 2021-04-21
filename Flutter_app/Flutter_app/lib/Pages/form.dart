@@ -188,6 +188,7 @@ class _FormPageState extends State<FormPage> {
       ],
     );
   }
+
   //Checkbox for conflict mediation
   Widget _buildMediationCauseCheckbox() {
     return Row(
@@ -212,6 +213,7 @@ class _FormPageState extends State<FormPage> {
       ],
     );
   }
+
   //Radio Buttons for Teacher Referral input
   Widget _buildTeacherReferralYN() {
     return Column(
@@ -281,7 +283,7 @@ class _FormPageState extends State<FormPage> {
     );
   }
 
-  Widget _buildResolutionAgreement(){
+  Widget _buildResolutionAgreement() {
     return Text(
       'Resolution/Agreement',
       style: TextStyle(fontWeight: FontWeight.bold),
@@ -290,8 +292,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildDisputantAgreementA() {
     return TextFormField(
-      decoration:
-          InputDecoration(labelText: 'Disputant A agrees to :'),
+      decoration: InputDecoration(labelText: 'Disputant A agrees to :'),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Please enter an agreement for Disputant A.';
@@ -305,8 +306,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildDisputantAgreementB() {
     return TextFormField(
-      decoration:
-          InputDecoration(labelText: 'Disputant B agrees to: '),
+      decoration: InputDecoration(labelText: 'Disputant B agrees to: '),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Please enter an agreement for Disputant B.';
@@ -320,8 +320,7 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildCheckBackTime() {
     return TextFormField(
-      decoration:
-          InputDecoration(labelText: 'Check back time: '),
+      decoration: InputDecoration(labelText: 'Check back time: '),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Please enter a check back time/date.';
@@ -391,13 +390,15 @@ class _FormPageState extends State<FormPage> {
                                 print('Mediator: ' + _mediatorName);
                                 print('Disputant A: ' + _disputantNameA);
                                 print('Disputant B: ' + _disputantNameB);
-                                print('Referred to a teacher? ' + _referralYN.toString());
-                                print('Good resolution? ' + _goodResolutionYN.toString());
+                                print('Referred to a teacher? ' +
+                                    _referralYN.toString());
+                                print('Good resolution? ' +
+                                    _goodResolutionYN.toString());
                                 print('Resolution/Agreement ');
-                                print('(nameA): '+ _disputantNameA);
-                                print('Agrees to: '+ _disputantAgreementA);
-                                print('(nameB): '+ _disputantNameB);
-                                print('Agrees to '+ _disputantAgreementB);
+                                print('(nameA): ' + _disputantNameA);
+                                print('Agrees to: ' + _disputantAgreementA);
+                                print('(nameB): ' + _disputantNameB);
+                                print('Agrees to ' + _disputantAgreementB);
                                 print('Check back time: ' + _checkbackTime);
                               },
                             )
