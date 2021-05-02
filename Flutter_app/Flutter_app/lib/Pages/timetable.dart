@@ -8,6 +8,112 @@ class Timetable extends StatefulWidget {
 String _mediators;
 String _coordinators;
 
+var _mondayMediatorNames = [];
+var _mondayCoordinatorNames = [];
+
+String _mon7amMN;
+String _mon7amCN;
+int _hour = 7;
+
+String displayAndIncrement() {
+  _hour = _hour + 1;
+  if (_hour > 13) {
+    return (_hour - 13).toString() + ':00pm';
+  } else if (_hour == 13) {
+    return (_hour - 1).toString() + ':00pm';
+  } else {
+    return (_hour - 1).toString() + ':00am';
+  }
+}
+
+String displayAndReset() {
+  _hour = 7;
+  return ('3:00pm');
+}
+
+DataRow buildIncrementRow() {
+  return DataRow(
+    cells: <DataCell>[
+      DataCell(Text(displayAndIncrement())),
+      DataCell(TextFormField(
+        decoration: InputDecoration(labelText: 'Enter mediator name'),
+        keyboardType: TextInputType.text,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Please enter mediator name(s).';
+          }
+        },
+        onSaved: (String value) {
+          _mondayMediatorNames[_hour] = value;
+          print(_mondayMediatorNames[_hour]);
+        },
+      )),
+      DataCell(TextFormField(
+        decoration: InputDecoration(labelText: 'Enter coordinator name'),
+        keyboardType: TextInputType.text,
+        onFieldSubmitted: (val) {
+          print('onSubmitted ' + _coordinators);
+        },
+      )),
+    ],
+  );
+}
+
+DataRow buildResetRow() {
+  return DataRow(
+    cells: <DataCell>[
+      DataCell(Text(displayAndReset())),
+      DataCell(TextFormField(
+        decoration: InputDecoration(labelText: 'Enter mediator name'),
+        keyboardType: TextInputType.text,
+        onFieldSubmitted: (val) {
+          print('onSubmitted ' + _mediators);
+        },
+      )),
+      DataCell(TextFormField(
+        decoration: InputDecoration(labelText: 'Enter coordinator name'),
+        keyboardType: TextInputType.text,
+        onFieldSubmitted: (val) {
+          print('onSubmitted ' + _coordinators);
+        },
+      )),
+    ],
+  );
+}
+
+Widget buildDay(String day) {
+  return DataTable(columns: <DataColumn>[
+    DataColumn(
+      label: Text(
+        'Time/Date',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        day,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      ),
+    ),
+    DataColumn(
+      label: Text(
+        ' ',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      ),
+    ),
+  ], rows: <DataRow>[
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildIncrementRow(),
+    buildResetRow(),
+  ]);
+}
+
 class _TimetableState extends State<Timetable> {
   @override
   Widget build(BuildContext context) {
@@ -19,1011 +125,17 @@ class _TimetableState extends State<Timetable> {
         scrollDirection: Axis.horizontal,
         controller: controller,
         children: [
-          DataTable(columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Time/Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Monday',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                ' ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-          ], rows: <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('7:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('8:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('9:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('10:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('11:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('12:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('1:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('2:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('3:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-          ]),
-          DataTable(columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Time/Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Tuesday',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                ' ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-          ], rows: <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('7:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('8:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('9:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('10:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('11:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('12:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('1:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('2:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('3:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-          ]),
-          DataTable(columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Time/Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Wednesday',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                ' ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-          ], rows: <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('7:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('8:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('9:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('10:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('11:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('12:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('1:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('2:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('3:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-          ]),
-          DataTable(columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Time/Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Thursday',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                ' ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-          ], rows: <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('7:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('8:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('9:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('10:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('11:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('12:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('1:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('2:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('3:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-          ]),
-          DataTable(columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Time/Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Friday',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                ' ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-            ),
-          ], rows: <DataRow>[
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('7:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('8:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('9:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('10:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('11:00am')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('12:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('1:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('2:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-            DataRow(
-              cells: <DataCell>[
-                DataCell(Text('3:00pm')),
-                DataCell(TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter mediator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _mediators);
-                  },
-                )),
-                DataCell(TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter coordinator name'),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (val) {
-                    print('onSubmitted ' + _coordinators);
-                  },
-                )),
-              ],
-            ),
-          ]),
+          buildDay('Monday'),
+          ElevatedButton(
+            child: Text('Submit'),
+            onPressed: () {
+              print(_mondayMediatorNames[_hour]);
+            },
+          ),
+          buildDay('Tuesday'),
+          buildDay('Wednesday'),
+          buildDay('Thursday'),
+          buildDay('Friday'),
         ],
       ),
     );
