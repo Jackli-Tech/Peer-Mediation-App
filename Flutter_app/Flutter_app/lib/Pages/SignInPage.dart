@@ -1,6 +1,6 @@
 import 'dart:convert';
 // import 'dart:developer';
-import 'package:Flutter_app/Pages/home.dart';
+import '../Pages/home.dart';
 import './UserPage.dart';
 import './AdminPage.dart';
 import 'package:Flutter_app/Pages/SignUpPage.dart';
@@ -119,7 +119,7 @@ class _SignInPageState extends State<SignInPage> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UserPage(),
+                            builder: (context) => HomePage(),
                           ),
                           (route) => false);
                     }
@@ -144,9 +144,10 @@ class _SignInPageState extends State<SignInPage> {
                     }
                     ;
                   } else {
+                    String output = json.decode(response.body);
                     setState(() {
                       validate = false;
-                      errorText = "output";
+                      errorText = output;
                       circular = false;
                     });
                   }

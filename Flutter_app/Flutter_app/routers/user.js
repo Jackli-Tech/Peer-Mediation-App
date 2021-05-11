@@ -3,7 +3,7 @@ const User = require("../models/users.model");
 const config = require("../config");
 const jwt = require("jsonwebtoken");
 const middleware = require("../middleware");
-
+const Form = require("../models/formData");
 const router = express.Router();
 
 router.route("/:username").get(middleware.checkToken, (req, res) => {
@@ -34,7 +34,6 @@ router.route("/checkusername/:username").get((req, res) => {
 // User login
 router.route("/login").post((req, res) => {
   User.findOne({ username: req.body.username }, (err, result) => {
-    
     if (err) return res.status(500).json({ msg: err });
     if (result === null) {
       return res.status(403).json("Username incorrect");
@@ -52,7 +51,7 @@ router.route("/login").post((req, res) => {
         { username: req.body.username, role: result.role },
         config.key,
         {
-          expiresIn: "24h",
+          // expiresIn: "24h",
         }
       );
       console.log(req.body.username);
@@ -245,6 +244,33 @@ router.route("/delete/:username").delete(middleware.checkToken, (req, res) => {
     };
     return res.json(msg);
   });
+});
+router.route("/form-store").post(async (req, res) => {
+  // const role = "user";
+  // console.log(req);
+  const form = new Form({
+    MediatorName: req.body.MediatorName,
+    DisputantAName: req.body.DisputantAName,
+    DisputantBName: req.body.DisputantBName,
+    Conflict: req.body.Conflict,
+    HowCome: req.body.HowCome,
+    Refer: req.body.Refer,
+    Agree: req.body.Agree,
+    DisputantASign: req.body.DisputantASign,
+    DisputantBSign: req.body.DisputantBSign,
+    createTime: req.body.createTime,
+  });
+  form
+    .save()
+    .then(() => {
+      console.log("Form stored");
+
+      res.status(200).json("okk");
+    })
+    .catch((err) => {
+      res.status(403).json({ msg: err });
+      console.log(err);
+    });
 });
 
 module.exports = router;

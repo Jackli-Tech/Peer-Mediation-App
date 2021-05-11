@@ -17,6 +17,7 @@ mongoose.connect(
     userNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   }
 );
 
@@ -25,14 +26,16 @@ connection.once("open", () => {
   console.log("mongodb connected!!!!!!!!!");
 });
 // app.use(cors());
+app.use("/uploads", express.static("uploads"));
 app.use(express.json());
-
+const profileRoute = require("./routers/profile");
+app.use("/profile", profileRoute);
 app.use("/user", userRoute);
 
-app.route("/").get((req, res) => {res.json("hello world")}
-
-);
+app.route("/").get((req, res) => {
+  res.json("hello world");
+});
 app.route("/user").get((req, res) => res.json("hello "));
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`welcome ur listening at port ${port}`);
 });

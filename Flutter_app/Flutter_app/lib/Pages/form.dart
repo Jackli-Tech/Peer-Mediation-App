@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../NetworkHandler.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 enum ynAnswer { Yes, No }
 
 class FormPage extends StatefulWidget {
@@ -9,6 +12,8 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+   final storage = new FlutterSecureStorage();
+  NetworkHandler networkHandler = new NetworkHandler();
   int _currentTabIndex = 0;
   final List<Widget> _children = [];
 
@@ -72,7 +77,7 @@ class _FormPageState extends State<FormPage> {
     });
     print("Conflict/Mediation Reason: ");
     print(store);
-    store.clear();
+    return store.join(", ");
   }
 
   ynAnswer _referralYN = ynAnswer.No;
@@ -379,14 +384,53 @@ class _FormPageState extends State<FormPage> {
                             SizedBox(height: 60.0),
                             RaisedButton(
                               child: Text('Submit'),
-                              onPressed: () {
+                              onPressed: () async {
+                                try {
+                                  Map<String, String> data = {
+                                    "MediatorName": _mediatorName,
+                                    "DisputantAName": _disputantNameA,
+                                    "DisputantBName": _disputantNameB,
+                                    "Conflict":
+                                        // getItems(conflictCauses, conflictCause)
+                                        
+                                      "11"
+                                            ,
+                                    "HowCome": 
+                                    // getItems(
+                                    //         mediationCauses, mediationCause)
+                                    "22"
+                                        ,
+                                    "Refer": 
+                                    // _referralYN.toString(),
+                                    "12",
+                                    "Agree": 
+                                    // _goodResolutionYN.toString(),
+                                    "22",
+                                    "DisputantASign": _disputantAgreementA,
+                                    "DisputantBSign": _disputantAgreementB,
+                                    "createTime": _checkbackTime,
+                                  };
+                                  var response = await networkHandler.post(
+                                      "/user/form-store", data);
+                                  if (response.statusCode == 200 ||
+                                      response.statusCode == 201) {
+                                        Map<String, dynamic> output = json.decode(response.body);
+                                        await storage.write(key: "token", value: output["token"]);
+                                    print("success");
+                                  }
+                                } catch (e) {
+                                  print(e);
+                                }
+
                                 if (!_formKey.currentState.validate()) {
                                   return;
                                 }
                                 _formKey.currentState.save();
                                 //print('Date/Time: ' + _disputeDate);
-                                getItems(conflictCauses, conflictCause);
-                                getItems(mediationCauses, mediationCause);
+                                //getItems(conflictCauses, conflictCause);
+                                print("1");
+                                print("2");
+                                // getItems(mediationCauses, mediationCause);
                                 print('Mediator: ' + _mediatorName);
                                 print('Disputant A: ' + _disputantNameA);
                                 print('Disputant B: ' + _disputantNameB);
@@ -405,31 +449,6 @@ class _FormPageState extends State<FormPage> {
                           ]))),
                 ])),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentTabIndex,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                title: Text('Profile'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.toc),
-                title: Text('Mediation Process'),
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Settings'),
-                backgroundColor: Colors.blue),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentTabIndex = index;
-            });
-          }),
     );
   }
 }

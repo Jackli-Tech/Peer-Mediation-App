@@ -2,7 +2,7 @@ import 'mediationprocess.dart';
 import 'package:flutter/material.dart';
 //import 'loginscreen.dart';
 import 'form.dart';
-import 'profile.dart';
+import '../Profile/ProfileScreen.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => ProfileScreen(),
                       ));
                     }),
                 SizedBox(height: 50.0),

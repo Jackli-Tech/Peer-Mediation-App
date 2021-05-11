@@ -47,15 +47,8 @@ class _WelcomePageState extends State<WelcomePage> {
               SizedBox(
                 height: 20,
               ),
-              boxContainer("assets/download.png", "Sign up with Google", null),
-              SizedBox(
-                height: 20,
-              ),
-              boxContainer(
-                  "assets/download-1.png", "Sign up with Facebook", null),
-              SizedBox(
-                height: 20,
-              ),
+             
+             
               boxContainer(
                   "assets/download-2.png", "Sign up with Email", onEmailClick),
               SizedBox(
