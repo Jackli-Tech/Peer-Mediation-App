@@ -5,113 +5,77 @@ class Timetable extends StatefulWidget {
   _TimetableState createState() => _TimetableState();
 }
 
-String _mediators;
-String _coordinators;
+final GlobalKey<FormState> _mondayKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _tuesdayKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _wednesdayKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _thursdayKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _fridayKey = GlobalKey<FormState>();
 
-var _mondayMediatorNames = [];
-var _mondayCoordinatorNames = [];
+var mondayNames = [];
+var tuesdayNames = [];
+var wednesdayNames = [];
+var thursdayNames = [];
+var fridayNames = [];
 
-String _mon7amMN;
-String _mon7amCN;
-int _hour = 7;
-
-String displayAndIncrement() {
-  _hour = _hour + 1;
-  if (_hour > 13) {
-    return (_hour - 13).toString() + ':00pm';
-  } else if (_hour == 13) {
-    return (_hour - 1).toString() + ':00pm';
-  } else {
-    return (_hour - 1).toString() + ':00am';
-  }
-}
-
-String displayAndReset() {
-  _hour = 7;
-  return ('3:00pm');
-}
-
-DataRow buildIncrementRow() {
-  return DataRow(
-    cells: <DataCell>[
-      DataCell(Text(displayAndIncrement())),
-      DataCell(TextFormField(
-        decoration: InputDecoration(labelText: 'Enter mediator name'),
-        keyboardType: TextInputType.text,
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Please enter mediator name(s).';
-          }
-        },
+Widget buildRow(var dayNames, String time) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: <Widget>[
+      //Time
+      Expanded(child: Text("Time: " + time)),
+      //Name
+      Expanded(
+          child: TextFormField(
+        decoration: InputDecoration(labelText: 'Mediator Name:'),
         onSaved: (String value) {
-          _mondayMediatorNames[_hour] = value;
-          print(_mondayMediatorNames[_hour]);
+          dayNames.add(value);
         },
       )),
-      DataCell(TextFormField(
-        decoration: InputDecoration(labelText: 'Enter coordinator name'),
-        keyboardType: TextInputType.text,
-        onFieldSubmitted: (val) {
-          print('onSubmitted ' + _coordinators);
-        },
-      )),
-    ],
-  );
-}
-
-DataRow buildResetRow() {
-  return DataRow(
-    cells: <DataCell>[
-      DataCell(Text(displayAndReset())),
-      DataCell(TextFormField(
-        decoration: InputDecoration(labelText: 'Enter mediator name'),
-        keyboardType: TextInputType.text,
-        onFieldSubmitted: (val) {
-          print('onSubmitted ' + _mediators);
-        },
-      )),
-      DataCell(TextFormField(
-        decoration: InputDecoration(labelText: 'Enter coordinator name'),
-        keyboardType: TextInputType.text,
-        onFieldSubmitted: (val) {
-          print('onSubmitted ' + _coordinators);
+      //Name
+      Expanded(
+          child: TextFormField(
+        decoration: InputDecoration(labelText: 'Coordinator Name:'),
+        onSaved: (String value) {
+          dayNames.add(value);
         },
       )),
     ],
   );
 }
 
-Widget buildDay(String day) {
-  return DataTable(columns: <DataColumn>[
-    DataColumn(
-      label: Text(
-        'Time/Date',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      ),
-    ),
-    DataColumn(
-      label: Text(
-        day,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      ),
-    ),
-    DataColumn(
-      label: Text(
-        ' ',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      ),
-    ),
-  ], rows: <DataRow>[
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildIncrementRow(),
-    buildResetRow(),
-  ]);
+Widget submitButton(var day, String dayName, GlobalKey<FormState> key) {
+  return ElevatedButton(
+    child: Text('Submit'),
+    onPressed: () {
+      if (key.currentState.validate()) {
+        key.currentState.save();
+        print("Saved!");
+      }
+      print("Submit button pressed!");
+      print(dayName + ": " + day.toString());
+      day.clear();
+    },
+  );
+}
+
+Widget buildDay(String day, var dayNames, GlobalKey<FormState> dayKey) {
+  return Form(
+      key: dayKey,
+      child: Column(
+        children: <Widget>[
+          Text(day),
+          buildRow(dayNames, "7.00 am"),
+          buildRow(dayNames, "8.00 am"),
+          buildRow(dayNames, "9.00 am"),
+          buildRow(dayNames, "10.00 am"),
+          buildRow(dayNames, "11.00 am"),
+          buildRow(dayNames, "12.00 am"),
+          buildRow(dayNames, "1.00 pm"),
+          buildRow(dayNames, "2.00 pm"),
+          buildRow(dayNames, "3.00 pm"),
+          submitButton(dayNames, day, dayKey),
+        ],
+      ));
 }
 
 class _TimetableState extends State<Timetable> {
@@ -125,17 +89,11 @@ class _TimetableState extends State<Timetable> {
         scrollDirection: Axis.horizontal,
         controller: controller,
         children: [
-          buildDay('Monday'),
-          ElevatedButton(
-            child: Text('Submit'),
-            onPressed: () {
-              print(_mondayMediatorNames[_hour]);
-            },
-          ),
-          buildDay('Tuesday'),
-          buildDay('Wednesday'),
-          buildDay('Thursday'),
-          buildDay('Friday'),
+          buildDay("Monday", mondayNames, _mondayKey),
+          buildDay("Tuesday", tuesdayNames, _tuesdayKey),
+          buildDay("Wednesday", wednesdayNames, _wednesdayKey),
+          buildDay("Thursday", thursdayNames, _thursdayKey),
+          buildDay("Friday", fridayNames, _fridayKey),
         ],
       ),
     );
