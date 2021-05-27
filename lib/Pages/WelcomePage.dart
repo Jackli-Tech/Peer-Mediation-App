@@ -1,4 +1,4 @@
-import 'SignUpPage.dart';
+import 'SignUpUserPage.dart';
 import 'SignInPage.dart';
 import 'package:flutter/material.dart';
 
@@ -49,8 +49,8 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
              
              
-              boxContainer(
-                  "assets/download-2.png", "Sign up with Email", onEmailClick),
+              // boxContainer(
+              //     "assets/download-2.png", "Sign up with Email", onEmailClick),
               SizedBox(
                 height: 20,
               ),
@@ -91,19 +91,7 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  onEmailClick() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SignUpPage(),
-    ));
 
-    // Navigator.of(context).push(MaterialPageRoute(
-    //   builder: (context) => SignUpPage(),
-    // ));
-    // Navigator.push(
-    // context,
-    // MaterialPageRoute(builder: (context) => SignUpPage()),
-    // );
-  }
 
   Widget boxContainer(String path, String text, onclick) {
     return InkWell(

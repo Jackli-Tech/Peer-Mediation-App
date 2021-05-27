@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'form.dart';
 import '../Profile/ProfileScreen.dart';
 import 'settings.dart';
-
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  // final storage = FlutterSecureStorage();
   @override
   Widget build(BuildContext context) {
     PageController homeController = PageController(initialPage: 0);

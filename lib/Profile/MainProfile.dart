@@ -1,6 +1,7 @@
 // import 'package:blogapp/Blog/Blogs.dart';
 import '../Model/profileModel.dart';
 import '../NetworkHandler.dart';
+import './UpdateProfile.dart';
 import 'package:flutter/material.dart';
 
 class MainProfile extends StatefulWidget {
@@ -14,6 +15,7 @@ class _MainProfileState extends State<MainProfile> {
   bool circular = true;
   NetworkHandler networkHandler = NetworkHandler();
   ProfileModel profileModel = ProfileModel();
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,7 @@ class _MainProfileState extends State<MainProfile> {
       circular = false;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,11 @@ class _MainProfileState extends State<MainProfile> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: ()=>{
+              Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => UpdateProfile()),
+                            (route) => false)
+            },
             color: Colors.black,
           ),
         ],

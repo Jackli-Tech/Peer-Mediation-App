@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'SignInPage.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final storage = FlutterSecureStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,14 +43,23 @@ class _SettingsPageState extends State<SettingsPage> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SignInPage(),
-                      ));
+                    onPressed: () async{
+                     await storage.delete(key: "token");
+               Navigator.pushAndRemoveUntil(
+               context,
+            MaterialPageRoute(builder: (context) => SignInPage()),
+              (route) => false);
                     }),
               ],
             )),
       ),
     );
+  }
+  void logout() async {
+    await storage.delete(key: "token");
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => SignInPage()),
+        (route) => false);
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../NetworkHandler.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 enum ynAnswer { Yes, No }
 
 class FormPage extends StatefulWidget {
@@ -12,8 +13,9 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-   final storage = new FlutterSecureStorage();
+  final storage = new FlutterSecureStorage();
   NetworkHandler networkHandler = new NetworkHandler();
+  final _formKey = GlobalKey<FormState>();
   int _currentTabIndex = 0;
   final List<Widget> _children = [];
 
@@ -83,7 +85,10 @@ class _FormPageState extends State<FormPage> {
   ynAnswer _referralYN = ynAnswer.No;
   ynAnswer _goodResolutionYN = ynAnswer.No;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+  
+  
+  
   var txtController = TextEditingController();
 
 //Widgets
@@ -386,36 +391,35 @@ class _FormPageState extends State<FormPage> {
                               child: Text('Submit'),
                               onPressed: () async {
                                 try {
+                                  _formKey.currentState.save();
                                   Map<String, String> data = {
                                     "MediatorName": _mediatorName,
                                     "DisputantAName": _disputantNameA,
                                     "DisputantBName": _disputantNameB,
                                     "Conflict":
-                                        // getItems(conflictCauses, conflictCause)
+                                        getItems(conflictCauses, conflictCause),
+
                                         
-                                      "11"
-                                            ,
-                                    "HowCome": 
-                                    // getItems(
-                                    //         mediationCauses, mediationCause)
-                                    "22"
-                                        ,
-                                    "Refer": 
-                                    // _referralYN.toString(),
-                                    "12",
-                                    "Agree": 
-                                    // _goodResolutionYN.toString(),
-                                    "22",
+                                    "HowCome":
+                                        getItems(
+                                                mediationCauses, mediationCause),
+                                        
+                                    "Refer":
+                                        _referralYN.toString(),
+                                        
+                                    "Agree":
+                                        _goodResolutionYN.toString(),
+                                        
                                     "DisputantASign": _disputantAgreementA,
                                     "DisputantBSign": _disputantAgreementB,
                                     "createTime": _checkbackTime,
                                   };
                                   var response = await networkHandler.post(
                                       "/user/form-store", data);
+                                  print(response.statusCode);
                                   if (response.statusCode == 200 ||
                                       response.statusCode == 201) {
-                                        Map<String, dynamic> output = json.decode(response.body);
-                                        await storage.write(key: "token", value: output["token"]);
+                                   
                                     print("success");
                                   }
                                 } catch (e) {
@@ -425,7 +429,7 @@ class _FormPageState extends State<FormPage> {
                                 if (!_formKey.currentState.validate()) {
                                   return;
                                 }
-                                _formKey.currentState.save();
+                                
                                 //print('Date/Time: ' + _disputeDate);
                                 //getItems(conflictCauses, conflictCause);
                                 print("1");

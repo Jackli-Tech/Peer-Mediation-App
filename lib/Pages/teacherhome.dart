@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'viewformsusers.dart';
+import 'viewFormsUsers.dart';
 import '../Profile/ProfileScreen.dart';
 import 'timetable.dart';
 import 'settings.dart';
@@ -36,7 +36,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ViewFormsUsers(),
+                        builder: (context) => ViewForms(),
                       ));
                     }),
                 SizedBox(height: 50.0),

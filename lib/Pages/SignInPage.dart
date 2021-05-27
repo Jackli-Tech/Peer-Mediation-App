@@ -1,9 +1,8 @@
 import 'dart:convert';
 // import 'dart:developer';
 import '../Pages/home.dart';
-import './UserPage.dart';
-import './AdminPage.dart';
-import 'package:Flutter_app/Pages/SignUpPage.dart';
+import './teacherhome.dart';
+import 'package:Flutter_app/Pages/SuperAdminPage.dart';
 import 'package:flutter/material.dart';
 import '../NetworkHandler.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -45,7 +44,7 @@ class _SignInPageState extends State<SignInPage> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                "Sign In with Email",
+                "Sign In",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -74,20 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 20),
-                  InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpPage()));
-                      },
-                      child: Text(
-                        "New User ?",
-                        style: TextStyle(
-                            color: Colors.blue[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      )),
+                  
                 ],
               ),
               SizedBox(
@@ -123,26 +109,25 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           (route) => false);
                     }
-                    ;
+                    
 
                     if (output["role"] == "admin") {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                            builder: (context) => TeacherHome(),
                           ),
                           (route) => false);
                     }
-                    ;
+                    
                     if (output["role"] == "superadmin") {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                            builder: (context) => SuperAdminPage(),
                           ),
                           (route) => false);
                     }
-                    ;
                   } else {
                     String output = json.decode(response.body);
                     setState(() {

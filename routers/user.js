@@ -4,19 +4,10 @@ const config = require("../config");
 const jwt = require("jsonwebtoken");
 const middleware = require("../middleware");
 const Form = require("../models/formData");
+const Table = require("../models/timetable");
 const router = express.Router();
 
-router.route("/:username").get(middleware.checkToken, (req, res) => {
-  User.findOne({ username: req.params.username }, (err, result) => {
-    if (err) return res.status(500).json({ msg: err });
-    // console.log(req.params);
-    // console.log(result);
-    res.json({
-      data: result,
-      username: req.params.username,
-    });
-  });
-});
+const { ObjectId } = require("mongodb");
 
 router.route("/checkusername/:username").get((req, res) => {
   User.findOne({ username: req.params.username }, (err, result) => {
@@ -220,7 +211,7 @@ router.route("/admin-protected").post(async (req, res) => {});
 //Super Admin Protected route
 router.route("/super-admin-protected").post(async (req, res) => {});
 
-router.route("/update/:username").patch((req, res) => {
+router.route("/update/:username").patch(middleware.checkToken, (req, res) => {
   User.findOneAndUpdate(
     { username: req.params.username },
     { $set: { password: req.body.password } },
@@ -245,10 +236,11 @@ router.route("/delete/:username").delete(middleware.checkToken, (req, res) => {
     return res.json(msg);
   });
 });
-router.route("/form-store").post(async (req, res) => {
+router.route("/form-store").post(middleware.checkToken, async (req, res) => {
   // const role = "user";
   // console.log(req);
   const form = new Form({
+    username: req.decoded.username,
     MediatorName: req.body.MediatorName,
     DisputantAName: req.body.DisputantAName,
     DisputantBName: req.body.DisputantBName,
@@ -268,9 +260,81 @@ router.route("/form-store").post(async (req, res) => {
       res.status(200).json("okk");
     })
     .catch((err) => {
-      res.status(403).json({ msg: err });
+      res.status(404).json({ msg: err });
       console.log(err);
     });
 });
 
+router
+  .route("/updateform/:id")
+  .patch(middleware.checkToken, async (req, res) => {
+    Form.findByIdAndUpdate(
+      { _id: ObjectId(req.params.id) },
+      {
+        MediatorName: req.body.MediatorName,
+        DisputantAName: req.body.DisputantAName,
+        DisputantBName: req.body.DisputantBName,
+        Conflict: req.body.Conflict,
+        HowCome: req.body.HowCome,
+        Refer: req.body.Refer,
+        Agree: req.body.Agree,
+        DisputantASign: req.body.DisputantASign,
+        DisputantBSign: req.body.DisputantBSign,
+      },
+      { new: true }
+    )
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => res.json(err));
+  });
+
+router.route("/getownform-data/:id").get(middleware.checkToken, (req, res) => {
+  Form.find({ _id: ObjectId(req.params.id) }, (err, result) => {
+    console.log(req.decoded.username);
+    console.log("get id");
+    if (err) return res.json({ err: err });
+    if (result == null) return res.json({ data: [] });
+    else return res.json({ data: result });
+  });
+});
+
+router.route("/getallform-data").get(middleware.checkToken, (req, res) => {
+  Form.find({}, (err, result) => {
+    console.log(req.decoded.username);
+    if (err) return res.json({ err: err });
+    if (result == null) return res.json({ data: [] });
+    else return res.json({ data: result });
+  });
+});
+
+router.route("/storetable").post(middleware.checkToken, async (req, res) => {
+
+  const table = new Table({
+    // username: req.decoded.username,
+    monday: req.body.mondayNames,
+    tuesday: req.body.tuesdayNames,
+    wednesday: req.body.wednesdayNames,
+    thursday: req.body.thursdayNames,
+    friday: req.body.fridayNames,
+  });
+  table
+    .save()
+    .then(() => {
+      console.log("table created");
+
+      res.status(200).json("okk");
+    })
+    .catch((err) => {
+      res.status(404).json({ msg: err });
+      console.log(err);
+    });
+});
+router.route("/gettable").get(middleware.checkToken, (req, res) => {
+  Table.find({}, (err, result) => {
+    if (err) return res.json({ err: err });
+    if (result == null) return res.json({ data: [] });
+    else return res.json({ data: result });
+  });
+});
 module.exports = router;

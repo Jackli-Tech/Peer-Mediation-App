@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Form = Schema(
-  {
+  { username: String,
     MediatorName: {
       type: String,
       required: true,
