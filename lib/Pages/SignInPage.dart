@@ -12,6 +12,17 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
+class UsernameValidatorr {
+  static String validate(bool validate,String errorText) {
+    return validate ? null : errorText;
+  }
+}
+class PasswordValidatorr {
+  static String validate(bool validate,String errorText) {
+    return validate ? null : errorText;
+  }
+}
+
 class _SignInPageState extends State<SignInPage> {
   bool vis = true;
   final _globalkey = GlobalKey<FormState>();
@@ -73,7 +84,6 @@ class _SignInPageState extends State<SignInPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 20),
-                  
                 ],
               ),
               SizedBox(
@@ -109,7 +119,6 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           (route) => false);
                     }
-                    
 
                     if (output["role"] == "admin") {
                       Navigator.pushAndRemoveUntil(
@@ -119,7 +128,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           (route) => false);
                     }
-                    
+
                     if (output["role"] == "superadmin") {
                       Navigator.pushAndRemoveUntil(
                           context,
@@ -170,7 +179,7 @@ class _SignInPageState extends State<SignInPage> {
         TextFormField(
           controller: _usernameController,
           decoration: InputDecoration(
-              errorText: validate ? null : errorText,
+              errorText: UsernameValidatorr.validate(validate,errorText),
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                 color: Colors.black,
@@ -189,7 +198,7 @@ class _SignInPageState extends State<SignInPage> {
           controller: _passwordController,
           obscureText: vis,
           decoration: InputDecoration(
-              errorText: validate ? null : errorText,
+              errorText: PasswordValidatorr.validate(validate,errorText),
               suffixIcon: IconButton(
                 icon: Icon(vis ? Icons.visibility_off : Icons.visibility),
                 onPressed: () {

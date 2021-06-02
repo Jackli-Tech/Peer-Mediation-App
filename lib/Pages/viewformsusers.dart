@@ -23,6 +23,7 @@ class _ViewFormsState extends State<ViewForms> {
   @override
   void initState() {
     // TODO: implement initState
+    print("init");
     super.initState();
     fetchData();
   }
@@ -32,58 +33,14 @@ class _ViewFormsState extends State<ViewForms> {
     superModel = SuperModel.fromJson(response);
     setState(() {
       data = superModel.data;
+       data.forEach((element) {
+        print(element.id);
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   backgroundColor: Color(0xffEEEEFF),
-    //   appBar: AppBar(
-    //     elevation: 0,
-    //     backgroundColor: Colors.white10,
-    //     // leading: IconButton(
-    //     //   icon: Icon(Icons.arrow_back),
-    //     //   onPressed: () {},
-    //     //   color: Colors.black,
-    //     // ),
-    //     actions: <Widget>[
-    //       IconButton(
-    //         icon: Icon(Icons.edit),
-    //         onPressed: ()=>{
-    //           Navigator.of(context).pushAndRemoveUntil(
-    //                         MaterialPageRoute(builder: (context) => UpdateProfile()),
-    //                         (route) => false)
-    //         },
-    //         color: Colors.black,
-    //       ),
-    //     ],
-    //   ),
-    //   body: circular
-    //       ? Center(child: CircularProgressIndicator())
-    //       : ListView(
-    //           children: <Widget>[
-    //             head(),
-    //             Divider(
-    //               thickness: 0.8,
-    //             ),
-    //             otherDetails("About", profileModel.about),
-    //             otherDetails("Name", profileModel.name),
-    //             otherDetails("Profession", profileModel.profession),
-    //             otherDetails("DOB", profileModel.DOB),
-    //             Divider(
-    //               thickness: 0.8,
-    //             ),
-    //             SizedBox(
-    //               height: 20,
-    //             ),
-    //             // Blogs(
-    //             //   url: "/blogpost/getOwnBlog",
-    //             // ),
-    //           ],
-    //         ),
-    // );
-
     return data.length > 0
         ? Material(
             child: LayoutBuilder(
@@ -103,15 +60,19 @@ class _ViewFormsState extends State<ViewForms> {
                               .map(
                                 (item) => InkWell(
                                   onTap: () {
-                                                      
-                                                    Navigator.push( context, MaterialPageRoute( builder: (context) => FormPage(formModel:item)), ).then((value) => setState(() {}));
-                                                    },
-                                                                  child: Column(
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FormPage(formModel: item)),
+                                    ).then((value) => setState(() {}));
+                                  },
+                                  child: Column(
                                     children: <Widget>[
-                                    
                                       Container(
                                         height: 365,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         child: Card(
                                           elevation: 8,
                                           child: Column(
@@ -121,7 +82,6 @@ class _ViewFormsState extends State<ViewForms> {
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
-                                               
                                               ),
                                               Padding(
                                                 padding:
@@ -129,15 +89,20 @@ class _ViewFormsState extends State<ViewForms> {
                                                         horizontal: 20,
                                                         vertical: 10),
                                                 child: InkWell(
-                                                        onTap: () {
-                                                         Navigator.of(context).push(MaterialPageRoute(
-                                                       builder: (context) => FormPage(formModel:item),
-                                                      ));
-                                                      },                                        child: Text(
+                                                  onTap: () {
+                                                    Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          FormPage(
+                                                              formModel: item),
+                                                    ));
+                                                  },
+                                                  child: Text(
                                                     item.username,
                                                     style: TextStyle(
                                                       fontSize: 16,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
@@ -158,9 +123,14 @@ class _ViewFormsState extends State<ViewForms> {
                                                     ),
                                                     InkWell(
                                                       onTap: () {
-                                                         Navigator.of(context).push(MaterialPageRoute(
-                                                       builder: (context) => FormPage(formModel:item),
-                                                      ));
+                                                        Navigator.of(context)
+                                                            .push(
+                                                                MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              FormPage(
+                                                                  formModel:
+                                                                      item),
+                                                        ));
                                                       },
                                                       child: Text(
                                                         item.MediatorName,
@@ -180,8 +150,8 @@ class _ViewFormsState extends State<ViewForms> {
                                                     ),
                                                     Text(
                                                       item.createTime,
-                                                      style:
-                                                          TextStyle(fontSize: 15),
+                                                      style: TextStyle(
+                                                          fontSize: 15),
                                                     ),
                                                     SizedBox(
                                                       width: 15,
@@ -201,7 +171,8 @@ class _ViewFormsState extends State<ViewForms> {
                                         height: 10,
                                       ),
                                       Container(
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         child: Card(
                                           elevation: 15,
                                           child: Padding(
@@ -227,8 +198,7 @@ class _ViewFormsState extends State<ViewForms> {
             ),
           )
         : Center(
-            child: Text("We don't have any Blog Yet"),
+            child: Text("We don't have any POSTs Yet"),
           );
   }
 }
-

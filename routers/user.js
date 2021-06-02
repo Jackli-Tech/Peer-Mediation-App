@@ -4,7 +4,6 @@ const config = require("../config");
 const jwt = require("jsonwebtoken");
 const middleware = require("../middleware");
 const Form = require("../models/formData");
-const Table = require("../models/timetable");
 const router = express.Router();
 
 const { ObjectId } = require("mongodb");
@@ -308,33 +307,4 @@ router.route("/getallform-data").get(middleware.checkToken, (req, res) => {
   });
 });
 
-router.route("/storetable").post(middleware.checkToken, async (req, res) => {
-
-  const table = new Table({
-    // username: req.decoded.username,
-    monday: req.body.mondayNames,
-    tuesday: req.body.tuesdayNames,
-    wednesday: req.body.wednesdayNames,
-    thursday: req.body.thursdayNames,
-    friday: req.body.fridayNames,
-  });
-  table
-    .save()
-    .then(() => {
-      console.log("table created");
-
-      res.status(200).json("okk");
-    })
-    .catch((err) => {
-      res.status(404).json({ msg: err });
-      console.log(err);
-    });
-});
-router.route("/gettable").get(middleware.checkToken, (req, res) => {
-  Table.find({}, (err, result) => {
-    if (err) return res.json({ err: err });
-    if (result == null) return res.json({ data: [] });
-    else return res.json({ data: result });
-  });
-});
 module.exports = router;

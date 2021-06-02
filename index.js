@@ -31,7 +31,8 @@ app.use(express.json());
 const profileRoute = require("./routers/profile");
 app.use("/profile", profileRoute);
 app.use("/user", userRoute);
-
+const table = require("./routers/table");
+app.use("/timetable", table);
 app.route("/").get((req, res) => {
   res.json("hello world");
 });

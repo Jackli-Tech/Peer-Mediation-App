@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:Flutter_app/Pages/viewformsusers.dart';
@@ -77,6 +78,49 @@ class _FormPageState extends State<FormPage> {
   var conflictCause = [];
   var mediationCause = [];
 
+  // setItem(Map<String, bool> array, String checklistItem) {
+  //   List<String> newString = checklistItem.split(",");
+  //   // print("newString value: " + newString.toString());
+
+  //   array.forEach((key, value) {
+  //     if (newString.contains(key)) {
+  //       //if (array[key].toString() == newString.elementAt(key).toString()) {
+  //       print("Found match from array, matches newstring at " +
+  //           newString.toString());
+  //       newString.forEach((element) {
+  //         print("Element: " + element);
+  //       });
+  //     }
+  //   });
+  //   print("newString toString: " + newString.toString());
+  // }
+
+  void updateConflictCause() {
+    List<String> newString = widget.formModel.Conflict.split(", ");
+    newString.forEach((element) {
+      print(element);
+      conflictCauses.forEach((key, value) {
+        
+        if (element == key) {
+          conflictCauses['$element'] = true;
+        }
+      });
+    });
+  }
+
+  void updateRefer() {
+    List<String> newString = widget.formModel.HowCome.split(", ");
+        newString.forEach((element) {
+      print(element);
+      mediationCauses.forEach((key, value) {
+        
+        if (element == key) {
+          mediationCauses['$element'] = true;
+        }
+      });
+    });
+  }
+
   //getItems to add all true values to a passed array
   getItems(var array, var store) {
     array.forEach((key, value) {
@@ -106,10 +150,6 @@ class _FormPageState extends State<FormPage> {
     } else if (widget.formModel.Agree == "ynAnswer.No") {
       _goodResolutionYN = ynAnswer.No;
     }
-  }
-
-  causesF() {
-    
   }
 
   var txtController = TextEditingController();
@@ -202,6 +242,8 @@ class _FormPageState extends State<FormPage> {
 
   //Checkbox for conflict cause
   Widget _buildConflictCauseCheckbox() {
+    updateConflictCause();
+    // setItem(conflictCauses, '${widget.formModel.Conflict}');
     return Row(
       children: <Widget>[
         Expanded(
@@ -211,7 +253,7 @@ class _FormPageState extends State<FormPage> {
                 children: conflictCauses.keys.map((String key) {
               return new CheckboxListTile(
                 title: new Text(key),
-                value: widget.formModel.Conflict == key ? true : false,
+                value: conflictCauses[key],
                 onChanged: (bool value) {
                   setState(() {
                     conflictCauses[key] = value;
@@ -227,6 +269,7 @@ class _FormPageState extends State<FormPage> {
 
   //Checkbox for conflict mediation
   Widget _buildMediationCauseCheckbox() {
+    updateRefer();
     return Row(
       children: <Widget>[
         Expanded(
@@ -236,7 +279,7 @@ class _FormPageState extends State<FormPage> {
                 children: mediationCauses.keys.map((String key) {
               return new CheckboxListTile(
                 title: new Text(key),
-                value: widget.formModel.HowCome == key ? true : false,
+                value: mediationCauses[key],
                 onChanged: (bool value) {
                   setState(() {
                     mediationCauses[key] = value;
