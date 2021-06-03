@@ -129,90 +129,94 @@ Widget submitButton(
       onPressed: () async {
         if (key.currentState.validate()) {
           key.currentState.save();
-          if(dayName=="Monday"){
+          if (dayName == "Monday") {
             Map<String, String> data = {
-            "mondayNames": mondayNames.toString(),
-          };
-          var response = await networkHandler.patch(
-              "/timetable/updatetableMonday/60b4224131ee52a48608ba7e", data);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => TeacherHome()),
-            // );
-            print("success");
-          } else {
-            print("error");
+              "mondayNames": mondayNames.toString(),
+            };
+            var response = await networkHandler.patch(
+                "/timetable/updatetableMonday/60b80f6cffdeeeb96a3fb0fe", data);
+            if (response.statusCode == 200 || response.statusCode == 201) {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => TeacherHome()),
+              // );
+              print("success");
+            } else {
+              print("error");
+            }
+            day.clear();
+          } else if (dayName == "Tuesday") {
+            Map<String, String> data = {
+              "tuesdayNames": tuesdayNames.toString(),
+            };
+            var response = await networkHandler.patch(
+                "/timetable/updatetableTuesday/60b80f6cffdeeeb96a3fb0fe", data);
+            if (response.statusCode == 200 || response.statusCode == 201) {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => TeacherHome()),
+              // );
+              print("success");
+            } else {
+              print("error");
+            }
+            day.clear();
+          } else if (dayName == "Wednesday") {
+            Map<String, String> data = {
+              "wednesdayNames": wednesdayNames.toString(),
+            };
+            var response = await networkHandler.patch(
+                "/timetable/updatetableWednesday/60b80f6cffdeeeb96a3fb0fe",
+                data);
+            if (response.statusCode == 200 || response.statusCode == 201) {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => TeacherHome()),
+              // );
+              print("success");
+            } else {
+              print("error");
+            }
+            day.clear();
+          } else if (dayName == "Thursday") {
+            Map<String, String> data = {
+              "thursdayNames": thursdayNames.toString(),
+            };
+            var response = await networkHandler.patch(
+                "/timetable/updatetableThursday/60b80f6cffdeeeb96a3fb0fe",
+                data);
+            if (response.statusCode == 200 || response.statusCode == 201) {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => TeacherHome()),
+              // );
+              print("success");
+            } else {
+              print("error");
+            }
+            day.clear();
+          } else if (dayName == "Friday") {
+            Map<String, String> data = {
+              "fridayNames": fridayNames.toString(),
+            };
+            var response = await networkHandler.patch(
+                "/timetable/updatetableFriday/60b80f6cffdeeeb96a3fb0fe", data);
+            if (response.statusCode == 200 || response.statusCode == 201) {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => TeacherHome()),
+              // );
+              print("success");
+            } else {
+              print("error");
+            }
           }
           day.clear();
-          }else if(dayName=="Tuesday"){
-             Map<String, String> data = {
-            "tuesdayNames": tuesdayNames.toString(),
-          };
-          var response = await networkHandler.patch(
-              "/timetable/updatetableTuesday/60b4224131ee52a48608ba7e", data);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => TeacherHome()),
-            // );
-            print("success");
-          } else {
-            print("error");
-          }day.clear();
-          }else if(dayName=="Wednesday"){
-             Map<String, String> data = {
-            "wednesdayNames": wednesdayNames.toString(),
-          };
-          var response = await networkHandler.patch(
-              "/timetable/updatetableWednesday/60b4224131ee52a48608ba7e", data);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => TeacherHome()),
-            // );
-            print("success");
-          } else {
-            print("error");
-          }day.clear();
-          }else if(dayName=="Thursday"){
-             Map<String, String> data = {
-            "thursdayNames": thursdayNames.toString(),
-          };
-          var response = await networkHandler.patch(
-              "/timetable/updatetableThursday/60b4224131ee52a48608ba7e", data);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => TeacherHome()),
-            // );
-            print("success");
-          } else {
-            print("error");
-          }day.clear();
-          }else if(dayName=="Friday"){
-             Map<String, String> data = {
-            "fridayNames": fridayNames.toString(),
-          };
-          var response = await networkHandler.patch(
-              "/timetable/updatetableFriday/60b4224131ee52a48608ba7e", data);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => TeacherHome()),
-            // );
-            print("success");
-          } else {
-            print("error");
-          }
-          }day.clear();
-        
         }
 
         print("Submit button pressed!");
         print(dayName + ": " + day.toString());
         print(mondayNames.toString());
-        // day.clear();
       });
 }
 
@@ -246,53 +250,58 @@ loadTimetable(List<TimeModel> data, String day) async {
   data.forEach((element) {
     if (day == 'Monday') {
       String mondayFull = element.mondayTable;
-      if (mondayFull != "") {
+      if (mondayFull != null) {
+        print("before substr");
+        if ((mondayFull == null)) {
+          print("matched");
+        }
         mondayFull = mondayFull.substring(1, (mondayFull.length - 1));
         mondayString = mondayFull.split(", ");
         print("LT/mondaystring: " + mondayString.toString());
         return mondayString;
       } else {
-        mondayString = null;
+        print("Else");
+        mondayString = [];
       }
     } else if (day == 'Tuesday') {
       String tuesdayFull = element.tuesdayTable;
-      if (tuesdayFull != "") {
+      if (tuesdayFull != "" && tuesdayFull != null) {
         tuesdayFull = tuesdayFull.substring(1, (tuesdayFull.length - 1));
         tuesdayString = tuesdayFull.split(", ");
         print("LT/tuestring: " + tuesdayString.toString());
         return tuesdayString;
       } else {
-        tuesdayString = null;
+        tuesdayString = [];
       }
     } else if (day == 'Wednesday') {
       String wednesdayFull = element.wednesdayTable;
-      if (wednesdayFull != "") {
+      if (wednesdayFull != "" && wednesdayFull != null) {
         wednesdayFull = wednesdayFull.substring(1, (wednesdayFull.length - 1));
         wednesdayString = wednesdayFull.split(", ");
         print("LT/wednesdaystring: " + wednesdayString.toString());
         return wednesdayString;
       } else {
-        wednesdayString = null;
+        wednesdayString = [];
       }
     } else if (day == 'Thursday') {
       String thursdayFull = element.thursdayTable;
-      if (thursdayFull != "") {
+      if (thursdayFull != "" && thursdayFull != null) {
         thursdayFull = thursdayFull.substring(1, (thursdayFull.length - 1));
         thursdayString = thursdayFull.split(", ");
         print("LT/thursdaystring: " + thursdayString.toString());
         return thursdayString;
       } else {
-        thursdayString = null;
+        thursdayString = [];
       }
     } else if (day == 'Friday') {
       String fridayFull = element.fridayTable;
-      if (fridayFull != "") {
+      if (fridayFull != "" && fridayFull != null) {
         fridayFull = fridayFull.substring(1, (fridayFull.length - 1));
         fridayString = fridayFull.split(", ");
         print("LT/fridaystring: " + fridayString.toString());
         return fridayString;
       } else {
-        fridayString = null;
+        fridayString = [];
       }
     } else
       return "";
@@ -300,7 +309,6 @@ loadTimetable(List<TimeModel> data, String day) async {
 }
 
 class _TimetableState extends State<Timetable> {
-  // TimeModel data = [];
   TableModel tableModel = TableModel();
   List<TimeModel> data = [];
   NetworkHandler networkHandler = NetworkHandler();
@@ -312,11 +320,9 @@ class _TimetableState extends State<Timetable> {
     // ignore: todo
     // TODO: implement initState
     print("init");
-    // fetchData();
     setState(() {
       print("reloaded");
     });
-    // super.initState();
   }
 
   void fetchData() async {
@@ -329,7 +335,6 @@ class _TimetableState extends State<Timetable> {
       loadTimetable(data, "Wednesday");
       loadTimetable(data, "Thursday");
       loadTimetable(data, "Friday");
-      // (context as Element).reassemble();
     });
   }
 

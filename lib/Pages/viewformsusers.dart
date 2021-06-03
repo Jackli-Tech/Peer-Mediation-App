@@ -1,17 +1,27 @@
 // import 'package:blogapp/Blog/Blogs.dart';
 import 'package:Flutter_app/Model/formModel.dart';
+import 'package:Flutter_app/Pages/viewFormsUsers.dart';
 import '../Pages/home.dart';
 import '../Model/SuperModels.dart';
 import '../NetworkHandler.dart';
 import '../Profile/UpdateProfile.dart';
 import 'package:flutter/material.dart';
 import '../Pages/showForms.dart';
+import 'teacherhome.dart';
 
 class ViewForms extends StatefulWidget {
   ViewForms({Key key}) : super(key: key);
 
   @override
   _ViewFormsState createState() => _ViewFormsState();
+}
+ goBack(BuildContext context) {
+   Future.delayed(Duration.zero, () {
+  Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => TeacherHome(),
+                      ));
+});
+  
 }
 
 class _ViewFormsState extends State<ViewForms> {
@@ -33,7 +43,7 @@ class _ViewFormsState extends State<ViewForms> {
     superModel = SuperModel.fromJson(response);
     setState(() {
       data = superModel.data;
-       data.forEach((element) {
+      data.forEach((element) {
         print(element.id);
       });
     });
@@ -197,8 +207,16 @@ class _ViewFormsState extends State<ViewForms> {
               },
             ),
           )
-        : Center(
-            child: Text("We don't have any POSTs Yet"),
-          );
+        : Scaffold(
+        appBar: AppBar(title: Text("There are no Forms yet")),
+        body: PageView(
+            pageSnapping: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              Center(
+                child: Text("Sorry, there are no forms yet.", style: TextStyle(fontSize: 40),),
+                
+              )
+            ]));
   }
 }

@@ -11,7 +11,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("-AppName-")),
+      appBar: AppBar(title: Text("Cool Schools Mediation App")),
       body: SingleChildScrollView(
         //child: Container(
 

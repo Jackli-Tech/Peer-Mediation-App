@@ -258,7 +258,7 @@ class _ShowTimetableState extends State<ShowTimetable> {
   Widget build(BuildContext context) {
     PageController controller = PageController(initialPage: 0);
     return Scaffold(
-        appBar: AppBar(title: Text("Cool Schools Mediation App")),
+        appBar: AppBar(title: Text("Timetable")),
         body: PageView(
             pageSnapping: true,
             scrollDirection: Axis.horizontal,

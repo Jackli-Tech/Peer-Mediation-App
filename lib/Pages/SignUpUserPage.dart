@@ -36,7 +36,7 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Sign up with email",
+                "Create a new User Account",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -183,7 +183,7 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
             controller: _passwordController,
             validator: (value) {
               if (value.isEmpty) return "Password can't be empty";
-              if (value.length <= 8) return "Password length must have >= 8";
+              if (value.length <= 8) return "Password length must be at least 8 characters";
               return null;
             },
             obscureText: vis,
@@ -196,7 +196,7 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
                     });
                   },
                 ),
-                helperText: "Password length should have >=8",
+                helperText: "Password length must be at least 8 characters",
                 helperStyle: TextStyle(
                   fontSize: 16,
                 ),

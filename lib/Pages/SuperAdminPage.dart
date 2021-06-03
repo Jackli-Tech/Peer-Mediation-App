@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'SignUpAdminPage.dart';
 import 'SignUpSuperAdminPage.dart';
+import 'settings.dart';
 class SuperAdminPage extends StatefulWidget {
   @override
   _SuperAdminPageState createState() => _SuperAdminPageState();
@@ -11,129 +12,89 @@ class SuperAdminPage extends StatefulWidget {
 
 class _SuperAdminPageState extends State<SuperAdminPage> {
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
+    PageController homeController = PageController(initialPage: 0);
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.white, Colors.green[200]],
-              begin: const FractionalOffset(0.0, 1.0),
-              end: const FractionalOffset(0.0, 1.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.repeated),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-          child: Column(
-            children: [
-              SizedBox(height: 40.0),
-              Text(
-                "This is the SuperAdmin Page",
-                style: TextStyle(
-                    fontSize: 38,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 2),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height / 6),
-              Text(
-                "Please Click the buttons to do the operations",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 38,
-                  letterSpacing: 2,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+        appBar: AppBar(title: Text("Cool Schools Mediation App")),
+        body: PageView(
+          pageSnapping: true,
+          scrollDirection: Axis.vertical,
+          controller: homeController,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                  left: 200.0, top: 25.0, bottom: 25.0, right: 200.0),
+              child: ListView(children: <Widget>[
+                SizedBox(height: 40.0),
+                RaisedButton(
+                    child: Text('Sign up a Mediator',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
+                    padding: EdgeInsets.all(70),
+                    color: Colors.green,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                    onPressed: () {
+                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpUserPage(),
                       ));
-                    },
-                    child: Text(
-                      "Sign up a Mediator",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                    }),
+                SizedBox(height: 50.0),
+                RaisedButton(
+                    child: Text('Sign up an Admin',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
+                    padding: EdgeInsets.all(50),
+                    color: Colors.orange,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                    onPressed: () {
+                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpAdminPage(),
                       ));
-                    },
-                    child: Text(
-                      "Sign up a Coordinator",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
+                    }),
+                SizedBox(height: 50.0),
+                RaisedButton(
+                    child: Text('Sign up a Superadmin',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
+                    padding: EdgeInsets.all(70),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                    onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpSuperAdminPage(),
                       ));
-                    },
-                    child: Text(
-                      "Sign up a SuperAdmin",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
+                    }),
+                SizedBox(height: 50.0),
+                RaisedButton(
+                    child: Text('Settings',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40.0)),
+                    padding: EdgeInsets.all(70),
+                    color: Colors.red,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                    onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => SettingsPage(),
                       ));
-                    },
-                    child: Text(
-                      "HomePage",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+                    }),
+                SizedBox(height: 60.0),
+                Text('Swipe up for Duty Roster Table',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20.0, color: Colors.grey[500]))
+              ]),
+            ),
+            
+          ],
+        ));
   }
-
   
 
   Widget boxContainer(String path, String text, onclick) {

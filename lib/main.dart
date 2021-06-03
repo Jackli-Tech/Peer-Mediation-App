@@ -2,6 +2,7 @@
 
 
 import 'package:Flutter_app/Pages/SignInPage.dart';
+import 'package:Flutter_app/Pages/WelcomePage.dart';
 import 'package:Flutter_app/Pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SignInPage(),
+      home: WelcomePage(),
     );
   }
 }

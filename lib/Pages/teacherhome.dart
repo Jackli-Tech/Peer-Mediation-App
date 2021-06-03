@@ -85,62 +85,9 @@ class _TeacherHomeState extends State<TeacherHome> {
                       ));
                     }),
                 SizedBox(height: 60.0),
-                Text('Swipe up for Duty Roster Table',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20.0, color: Colors.grey[500]))
               ]),
             ),
-            DataTable(columns: const <DataColumn>[
-              DataColumn(
-                label: Text(
-                  'Name',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Duty Hours',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Role',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Class',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                ),
-              ),
-            ], rows: const <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('James')),
-                  DataCell(Text('10:00AM - 12:00PM')),
-                  DataCell(Text('Mediator')),
-                  DataCell(Text('7B')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Sarah')),
-                  DataCell(Text('10:00AM - 12:00PM')),
-                  DataCell(Text('Coordinator')),
-                  DataCell(Text('N/A')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Nick')),
-                  DataCell(Text('10:00AM - 12:00PM')),
-                  DataCell(Text('Mediator')),
-                  DataCell(Text('8B')),
-                ],
-              ),
-            ])
+            
           ],
         ));
   }

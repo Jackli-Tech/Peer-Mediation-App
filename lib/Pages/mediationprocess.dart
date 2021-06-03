@@ -62,7 +62,7 @@ class _MediationProcessState extends State<MediationProcess> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 400.0),
-                    Text('THE PRIMARY MEDIATION PROCESS,       IN BRIEF',
+                    Text('THE PRIMARY MEDIATION PROCESS, IN BRIEF',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
