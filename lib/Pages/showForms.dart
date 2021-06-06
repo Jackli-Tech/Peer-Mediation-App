@@ -483,11 +483,12 @@ class _FormPageState extends State<FormPage> {
                                       "/user/updateform/${widget.formModel.id}",
                                       data);
 
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ViewForms()),
-                                  ).then((value) => setState(() {}));
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => ViewForms()),
+                                  // ).then((value) => setState(() {}));
+                                  Navigator.pop(context,true);
                                   print(response.statusCode);
                                   if (response.statusCode == 200 ||
                                       response.statusCode == 201) {

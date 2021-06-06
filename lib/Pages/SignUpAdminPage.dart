@@ -84,14 +84,17 @@ class _SignUpAdminPageState extends State<SignUpAdminPage> {
                           borderRadius: BorderRadius.circular(10),
                           color: Color(0xff00A86B),
                         ),
-                        child: Center(
-                            child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
+                        child: InkWell(
+                          
+                                                  child: Center(
+                              child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          )),
+                        ),
                       ),
               )
             ],

@@ -25,6 +25,20 @@ class ViewForms extends StatefulWidget {
 }
 
 class _ViewFormsState extends State<ViewForms> {
+  _navigateAndDisplaySelection(BuildContext context,FormModel item) async {
+   Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FormPage(formModel: item)),
+    );
+
+    //below you can get your result and update the view with setState
+    //changing the value if you want, i just wanted know if i have to  
+    //update, and if is true, reload state
+
+
+      setState(() {});
+    
+  }
   bool circular = true;
   NetworkHandler networkHandler = NetworkHandler();
   SuperModel superModel = SuperModel();
@@ -70,12 +84,15 @@ class _ViewFormsState extends State<ViewForms> {
                               .map(
                                 (item) => InkWell(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              FormPage(formModel: item)),
-                                    ).then((value) => setState(() {}));
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           FormPage(formModel: item)),
+                                    // ).then((value) => setState(() {}));
+                                    _navigateAndDisplaySelection(context,item);
+
+                                  
                                   },
                                   child: Column(
                                     children: <Widget>[
@@ -98,16 +115,7 @@ class _ViewFormsState extends State<ViewForms> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                         vertical: 10),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          FormPage(
-                                                              formModel: item),
-                                                    ));
-                                                  },
-                                                  child: Text(
+                                                child:Text(
                                                     item.username,
                                                     style: TextStyle(
                                                       fontSize: 16,
@@ -116,7 +124,7 @@ class _ViewFormsState extends State<ViewForms> {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
@@ -131,23 +139,13 @@ class _ViewFormsState extends State<ViewForms> {
                                                     SizedBox(
                                                       width: 5,
                                                     ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                                MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              FormPage(
-                                                                  formModel:
-                                                                      item),
-                                                        ));
-                                                      },
-                                                      child: Text(
+                                                    
+                                                    Text(
                                                         item.MediatorName,
                                                         style: TextStyle(
                                                             fontSize: 15),
                                                       ),
-                                                    ),
+                                                    
                                                     SizedBox(
                                                       width: 15,
                                                     ),
