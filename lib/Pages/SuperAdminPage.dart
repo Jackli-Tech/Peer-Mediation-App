@@ -5,14 +5,16 @@ import 'home.dart';
 import 'SignUpAdminPage.dart';
 import 'SignUpSuperAdminPage.dart';
 import 'settings.dart';
+
 class SuperAdminPage extends StatefulWidget {
   @override
   _SuperAdminPageState createState() => _SuperAdminPageState();
 }
 
 class _SuperAdminPageState extends State<SuperAdminPage> {
+  // Homepage for the superadmin where they can sign up different users
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     PageController homeController = PageController(initialPage: 0);
     return Scaffold(
         appBar: AppBar(title: Text("Cool Schools Mediation App")),
@@ -36,7 +38,7 @@ Widget build(BuildContext context) {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
-                       Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpUserPage(),
                       ));
                     }),
@@ -51,7 +53,7 @@ Widget build(BuildContext context) {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     onPressed: () {
-                       Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpAdminPage(),
                       ));
                     }),
@@ -91,11 +93,9 @@ Widget build(BuildContext context) {
                     style: TextStyle(fontSize: 20.0, color: Colors.grey[500]))
               ]),
             ),
-            
           ],
         ));
   }
-  
 
   Widget boxContainer(String path, String text, onclick) {
     return InkWell(

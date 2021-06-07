@@ -6,6 +6,8 @@ class OpenQuestions extends StatefulWidget {
 }
 
 class _OpenQuestionsState extends State<OpenQuestions> {
+  
+  // Page for open questions for mediators to look at
   @override
   Widget build(BuildContext context) {
     return Scaffold(

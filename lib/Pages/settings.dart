@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'SignInPage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -8,19 +9,15 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final storage = FlutterSecureStorage();
+
+  // Settings page, mostly used to log out
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cool Schools Mediation App")),
       body: SingleChildScrollView(
-        //child: Container(
-
         child: ConstrainedBox(
-            //height: MediaQuery.of(context).size.height,
-            //child: Column(
-
             constraints: BoxConstraints(),
-            //the 3 following lines are very important(!!!) for scrolling mechanics. wrap a widget ina listview!!
             child: ListView(
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
@@ -43,18 +40,19 @@ class _SettingsPageState extends State<SettingsPage> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                    onPressed: () async{
-                     await storage.delete(key: "token");
-               Navigator.pushAndRemoveUntil(
-               context,
-            MaterialPageRoute(builder: (context) => SignInPage()),
-              (route) => false);
+                    onPressed: () async {
+                      await storage.delete(key: "token");
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignInPage()),
+                          (route) => false);
                     }),
               ],
             )),
       ),
     );
   }
+
   void logout() async {
     await storage.delete(key: "token");
     Navigator.pushAndRemoveUntil(

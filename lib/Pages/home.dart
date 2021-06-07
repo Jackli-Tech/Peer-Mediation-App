@@ -1,18 +1,16 @@
 import 'mediationprocess.dart';
 import 'package:flutter/material.dart';
-//import 'loginscreen.dart';
 import 'form.dart';
 import '../Profile/ProfileScreen.dart';
 import 'settings.dart';
 import 'showtimetable.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  // final storage = FlutterSecureStorage();
+  // Mediator home page for the application
   @override
   Widget build(BuildContext context) {
     PageController homeController = PageController(initialPage: 0);

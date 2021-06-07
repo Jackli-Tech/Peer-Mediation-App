@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../NetworkHandler.dart';
@@ -16,19 +14,6 @@ class _FormPageState extends State<FormPage> {
   final storage = new FlutterSecureStorage();
   NetworkHandler networkHandler = new NetworkHandler();
   final _formKey = GlobalKey<FormState>();
-  int _currentTabIndex = 0;
-  final List<Widget> _children = [];
-
-  onTapped(int index) {
-    setState(() {
-      _currentTabIndex = index;
-    });
-  }
-
-  List<Widget> tabs = [
-    //resources(),
-    //form(),
-  ];
 
   //Instantiate Variables
   String _mediatorName;
@@ -74,7 +59,6 @@ class _FormPageState extends State<FormPage> {
     array.forEach((key, value) {
       if (value == true) {
         store.add(key);
-        //print(value);
       }
     });
     print("Conflict/Mediation Reason: ");
@@ -84,11 +68,6 @@ class _FormPageState extends State<FormPage> {
 
   ynAnswer _referralYN = ynAnswer.No;
   ynAnswer _goodResolutionYN = ynAnswer.No;
-
-  
-  
-  
-  
   var txtController = TextEditingController();
 
 //Widgets
@@ -115,8 +94,6 @@ class _FormPageState extends State<FormPage> {
                       onDateTimeChanged: (val) {
                         setState(() {
                           _disputeDate = val;
-                          print('New Datetime: ');
-                          print(_disputeDate);
                         });
                       }),
                 ),
@@ -239,7 +216,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _referralYN = value;
-                  print(value);
                 });
               },
             )),
@@ -273,7 +249,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _goodResolutionYN = value;
-                  print(value);
                 });
               },
             )),
@@ -285,7 +260,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _goodResolutionYN = value;
-                  print(value);
                 });
               },
             ))
@@ -429,25 +403,6 @@ class _FormPageState extends State<FormPage> {
                                 if (!_formKey.currentState.validate()) {
                                   return;
                                 }
-                                
-                                //print('Date/Time: ' + _disputeDate);
-                                //getItems(conflictCauses, conflictCause);
-                                print("1");
-                                print("2");
-                                // getItems(mediationCauses, mediationCause);
-                                print('Mediator: ' + _mediatorName);
-                                print('Disputant A: ' + _disputantNameA);
-                                print('Disputant B: ' + _disputantNameB);
-                                print('Referred to a teacher? ' +
-                                    _referralYN.toString());
-                                print('Good resolution? ' +
-                                    _goodResolutionYN.toString());
-                                print('Resolution/Agreement ');
-                                print('(nameA): ' + _disputantNameA);
-                                print('Agrees to: ' + _disputantAgreementA);
-                                print('(nameB): ' + _disputantNameB);
-                                print('Agrees to ' + _disputantAgreementB);
-                                print('Check back time: ' + _checkbackTime);
                               },
                             )
                           ]))),

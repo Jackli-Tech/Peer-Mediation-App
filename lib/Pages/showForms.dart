@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:Flutter_app/Pages/viewformsusers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../NetworkHandler.dart';
@@ -33,10 +29,6 @@ class _FormPageState extends State<FormPage> {
     });
   }
 
-  List<Widget> tabs = [
-    //resources(),
-    //form(),
-  ];
 
   //Instantiate Variables
   String _mediatorName;
@@ -78,23 +70,6 @@ class _FormPageState extends State<FormPage> {
   var conflictCause = [];
   var mediationCause = [];
 
-  // setItem(Map<String, bool> array, String checklistItem) {
-  //   List<String> newString = checklistItem.split(",");
-  //   // print("newString value: " + newString.toString());
-
-  //   array.forEach((key, value) {
-  //     if (newString.contains(key)) {
-  //       //if (array[key].toString() == newString.elementAt(key).toString()) {
-  //       print("Found match from array, matches newstring at " +
-  //           newString.toString());
-  //       newString.forEach((element) {
-  //         print("Element: " + element);
-  //       });
-  //     }
-  //   });
-  //   print("newString toString: " + newString.toString());
-  // }
-
   void updateConflictCause() {
     List<String> newString = widget.formModel.Conflict.split(", ");
     newString.forEach((element) {
@@ -129,7 +104,6 @@ class _FormPageState extends State<FormPage> {
         //print(value);
       }
     });
-    print("Conflict/Mediation Reason: ");
     print(store);
     return store.join(", ");
   }
@@ -178,8 +152,6 @@ class _FormPageState extends State<FormPage> {
                       onDateTimeChanged: (val) {
                         setState(() {
                           _disputeDate = val;
-                          print('New Datetime: ');
-                          print(_disputeDate);
                         });
                       }),
                 ),
@@ -243,7 +215,6 @@ class _FormPageState extends State<FormPage> {
   //Checkbox for conflict cause
   Widget _buildConflictCauseCheckbox() {
     updateConflictCause();
-    // setItem(conflictCauses, '${widget.formModel.Conflict}');
     return Row(
       children: <Widget>[
         Expanded(
@@ -309,7 +280,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _referralYN = value;
-                  print(value);
                 });
               },
             )),
@@ -321,7 +291,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _referralYN = value;
-                  print(value);
                 });
               },
             ))
@@ -344,7 +313,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _goodResolutionYN = value;
-                  print(value);
                 });
               },
             )),
@@ -356,7 +324,6 @@ class _FormPageState extends State<FormPage> {
               onChanged: (ynAnswer value) {
                 setState(() {
                   _goodResolutionYN = value;
-                  print(value);
                 });
               },
             ))
@@ -416,6 +383,7 @@ class _FormPageState extends State<FormPage> {
     );
   }
 
+  // Page that shows the list of available forms the coordinator/admin/teacher level users
   @override
   Widget build(BuildContext context) {
     return Scaffold(

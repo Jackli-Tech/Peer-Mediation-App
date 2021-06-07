@@ -16,6 +16,8 @@ class _SignUpAdminPageState extends State<SignUpAdminPage> {
   String errorText;
   bool validate = false;
   bool circular = false;
+
+  // Page where you can sign up admins/coordinators/teachers
   @override
   Widget build(BuildContext context) {
     return Scaffold(

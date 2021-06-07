@@ -34,12 +34,12 @@ class _SignInPageState extends State<SignInPage> {
   bool validate = false;
   bool circular = false;
   final storage = new FlutterSecureStorage();
+
+  // Sign in page for the application
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // height: MediaQuery.of(context).size.height,
-        // width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.white, Colors.green[200]],
