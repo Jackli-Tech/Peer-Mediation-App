@@ -134,16 +134,6 @@ Widget submitButton(
             "thursdayNames": thursdayNames.toString(),
             "fridayNames": fridayNames.toString(),
           };
-          var response = await networkHandler.post("/timetable/Addtable", data);
-          print(response.statusCode);
-          if (response.statusCode == 200 || response.statusCode == 201) {
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (context) => Showtimetable(timeModel: localItem),
-            // ));
-            print("success");
-          } else {
-            print("error");
-          }
         }
 
         print("Submit button pressed!");
@@ -172,7 +162,6 @@ Widget buildDay(
           buildRow(day, dayNames, "1.00 pm"),
           buildRow(day, dayNames, "2.00 pm"),
           buildRow(day, dayNames, "3.00 pm"),
-          // submitButton(dayNames, day, dayKey, context),
         ],
       ));
 }
@@ -184,31 +173,26 @@ loadTimetable(List<TimeModel> data, String day) async {
       String mondayFull = element.mondayTable;
       mondayFull = mondayFull.substring(1, (mondayFull.length - 1));
       mondayString = mondayFull.split(", ");
-      print("LT/newstring: " + newString.toString());
       return mondayString;
     } else if (day == 'Tuesday') {
       String tuesdayFull = element.tuesdayTable;
       tuesdayFull = tuesdayFull.substring(1, (tuesdayFull.length - 1));
       tuesdayString = tuesdayFull.split(", ");
-      print("LT/newstring: " + newString.toString());
       return tuesdayString;
     } else if (day == 'Wednesday') {
       String wednesdayFull = element.wednesdayTable;
       wednesdayFull = wednesdayFull.substring(1, (wednesdayFull.length - 1));
       wednesdayString = wednesdayFull.split(", ");
-      print("LT/newstring: " + newString.toString());
       return wednesdayString;
     } else if (day == 'Thursday') {
       String thursdayFull = element.thursdayTable;
       thursdayFull = thursdayFull.substring(1, (thursdayFull.length - 1));
       thursdayString = thursdayFull.split(", ");
-      print("LT/newstring: " + newString.toString());
       return thursdayString;
     } else if (day == 'Friday') {
       String fridayFull = element.fridayTable;
       fridayFull = fridayFull.substring(1, (fridayFull.length - 1));
       fridayString = fridayFull.split(", ");
-      print("LT/newstring: " + newString.toString());
       return fridayString;
     } else
       return "";
@@ -254,6 +238,7 @@ class _ShowTimetableState extends State<ShowTimetable> {
     }
   }
 
+  // Timetable that shows for the mediators when they swipe up on their homepage
   @override
   Widget build(BuildContext context) {
     PageController controller = PageController(initialPage: 0);

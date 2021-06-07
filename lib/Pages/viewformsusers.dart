@@ -1,10 +1,6 @@
-// import 'package:blogapp/Blog/Blogs.dart';
 import 'package:Flutter_app/Model/formModel.dart';
-import 'package:Flutter_app/Pages/viewFormsUsers.dart';
-import '../Pages/home.dart';
 import '../Model/SuperModels.dart';
 import '../NetworkHandler.dart';
-import '../Profile/UpdateProfile.dart';
 import 'package:flutter/material.dart';
 import '../Pages/showForms.dart';
 import 'teacherhome.dart';
@@ -15,30 +11,24 @@ class ViewForms extends StatefulWidget {
   @override
   _ViewFormsState createState() => _ViewFormsState();
 }
- goBack(BuildContext context) {
-   Future.delayed(Duration.zero, () {
-  Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TeacherHome(),
-                      ));
-});
-  
+
+goBack(BuildContext context) {
+  Future.delayed(Duration.zero, () {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TeacherHome(),
+    ));
+  });
 }
 
 class _ViewFormsState extends State<ViewForms> {
-  _navigateAndDisplaySelection(BuildContext context,FormModel item) async {
-   Navigator.push(
+  _navigateAndDisplaySelection(BuildContext context, FormModel item) async {
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => FormPage(formModel: item)),
     );
-
-    //below you can get your result and update the view with setState
-    //changing the value if you want, i just wanted know if i have to  
-    //update, and if is true, reload state
-
-
-      setState(() {});
-    
+    setState(() {});
   }
+
   bool circular = true;
   NetworkHandler networkHandler = NetworkHandler();
   SuperModel superModel = SuperModel();
@@ -46,8 +36,6 @@ class _ViewFormsState extends State<ViewForms> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    print("init");
     super.initState();
     fetchData();
   }
@@ -63,6 +51,7 @@ class _ViewFormsState extends State<ViewForms> {
     });
   }
 
+  //Shows the currently available user forms in the database
   @override
   Widget build(BuildContext context) {
     return data.length > 0
@@ -84,15 +73,7 @@ class _ViewFormsState extends State<ViewForms> {
                               .map(
                                 (item) => InkWell(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           FormPage(formModel: item)),
-                                    // ).then((value) => setState(() {}));
-                                    _navigateAndDisplaySelection(context,item);
-
-                                  
+                                    _navigateAndDisplaySelection(context, item);
                                   },
                                   child: Column(
                                     children: <Widget>[
@@ -115,16 +96,14 @@ class _ViewFormsState extends State<ViewForms> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                         vertical: 10),
-                                                child:Text(
-                                                    item.username,
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                                child: Text(
+                                                  item.username,
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                              
+                                              ),
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
@@ -139,13 +118,11 @@ class _ViewFormsState extends State<ViewForms> {
                                                     SizedBox(
                                                       width: 5,
                                                     ),
-                                                    
                                                     Text(
-                                                        item.MediatorName,
-                                                        style: TextStyle(
-                                                            fontSize: 15),
-                                                      ),
-                                                    
+                                                      item.MediatorName,
+                                                      style: TextStyle(
+                                                          fontSize: 15),
+                                                    ),
                                                     SizedBox(
                                                       width: 15,
                                                     ),
@@ -188,7 +165,6 @@ class _ViewFormsState extends State<ViewForms> {
                                               horizontal: 10,
                                               vertical: 15,
                                             ),
-                                            // child: Text(for.body),
                                           ),
                                         ),
                                       ),
@@ -206,15 +182,17 @@ class _ViewFormsState extends State<ViewForms> {
             ),
           )
         : Scaffold(
-        appBar: AppBar(title: Text("There are no Forms yet")),
-        body: PageView(
-            pageSnapping: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              Center(
-                child: Text("Sorry, there are no forms yet.", style: TextStyle(fontSize: 40),),
-                
-              )
-            ]));
+            appBar: AppBar(title: Text("There are no Forms yet")),
+            body: PageView(
+                pageSnapping: true,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Center(
+                    child: Text(
+                      "Sorry, there are no forms yet.",
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  )
+                ]));
   }
 }

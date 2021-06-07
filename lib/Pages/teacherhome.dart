@@ -10,6 +10,7 @@ class TeacherHome extends StatefulWidget {
 }
 
 class _TeacherHomeState extends State<TeacherHome> {
+  //Homepage for the admin/coordinator/teacher
   @override
   Widget build(BuildContext context) {
     PageController homeController = PageController(initialPage: 0);
@@ -87,7 +88,6 @@ class _TeacherHomeState extends State<TeacherHome> {
                 SizedBox(height: 60.0),
               ]),
             ),
-            
           ],
         ));
   }

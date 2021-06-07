@@ -7,6 +7,7 @@ class MediationProcess extends StatefulWidget {
 }
 
 class _MediationProcessState extends State<MediationProcess> {
+  // Page to display a summarized version of the mediation process for mediators to jog their memory
   @override
   Widget build(BuildContext context) {
     PageController medProcessController = PageController(initialPage: 0);

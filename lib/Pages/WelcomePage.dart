@@ -1,4 +1,3 @@
-import 'SignUpUserPage.dart';
 import 'SignInPage.dart';
 import 'package:flutter/material.dart';
 
@@ -7,21 +6,21 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
+//The welcome page for the application
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     PageController homeController = PageController(initialPage: 0);
     return Scaffold(
-      body: 
-      Container(
-        color: Colors.lightGreen.shade100,
-        child: ListView(
-          
+        body: Container(
+      color: Colors.lightGreen.shade100,
+      child: ListView(
           scrollDirection: Axis.vertical,
           controller: homeController,
           children: [
             SizedBox(height: 200.0),
-            Center(child:Text(
+            Center(
+                child: Text(
               "Cool Schools Mediation App",
               style: TextStyle(fontSize: 50),
             )),
@@ -43,10 +42,11 @@ class _WelcomePageState extends State<WelcomePage> {
                   }),
             ),
             SizedBox(height: 500.0),
-            Center(child: Text("A collaboration between The Peace Foundation and AUT.")),
-          ]),)
-      
-    );
+            Center(
+                child: Text(
+                    "A collaboration between The Peace Foundation and AUT.")),
+          ]),
+    ));
   }
 
   Widget boxContainer(String path, String text, onclick) {
@@ -76,22 +76,3 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 }
-
-// InkWell(
-//                     onTap: () {
-//                       Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => SignInPage(),
-//                       ));
-//                     },
-//                     child: ElevatedButton(
-//                       child:
-//                         Text("Sign in",
-//                           style: TextStyle(
-//                           color: Colors.black87,
-//                           fontSize: 17,
-//                           fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-
-//                     ),
-//                   )

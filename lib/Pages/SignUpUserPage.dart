@@ -16,6 +16,8 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
   String errorText;
   bool validate = false;
   bool circular = false;
+
+  // Page where you can sign up mediators
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +87,7 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
                           color: Color(0xff00A86B),
                         ),
                         child: InkWell(
-                                                  child: Center(
+                          child: Center(
                               child: Text(
                             "Sign Up",
                             style: TextStyle(
@@ -103,7 +105,7 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
     );
   }
 
- checkUser() async {
+  checkUser() async {
     if (_usernameController.text.length == 0) {
       setState(() {
         // circular = false;
@@ -185,7 +187,8 @@ class _SignUpUserPageState extends State<SignUpUserPage> {
             controller: _passwordController,
             validator: (value) {
               if (value.isEmpty) return "Password can't be empty";
-              if (value.length <= 8) return "Password length must be at least 8 characters";
+              if (value.length <= 8)
+                return "Password length must be at least 8 characters";
               return null;
             },
             obscureText: vis,
